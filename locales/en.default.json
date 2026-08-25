@@ -1,0 +1,36 @@
+{
+  "general": {
+    "accessibility": {
+      "close": "Close",
+      "skip_to_content": "Skip to content"
+    },
+    "whatsapp": {
+      "chat_aria": "Chat with Maykey Hair Care on WhatsApp for support"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Cart",
+      "empty": "Your cart is empty",
+      "empty_subtext": "Explore our 15-minute hair darkening solutions.",
+      "continue_shopping": "Shop Shades",
+      "subtotal": "Subtotal",
+      "checkout": "Proceed to Checkout",
+      "taxes_and_shipping_policy_at_checkout_html": "Taxes included. Delivery calculated at checkout."
+    },
+    "shipping": {
+      "unlocked": "Congratulations! You unlocked Free Nationwide Delivery!"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "buy_now_cod": "Buy Now — Cash on Delivery",
+      "sold_out": "Sold Out",
+      "choose_shade": "Choose Shade",
+      "quantity": "Quantity",
+      "shade": "Shade",
+      "format_size": "Format / Size"
+    }
+  }
+}

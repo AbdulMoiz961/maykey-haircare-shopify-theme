@@ -1,0 +1,23 @@
+{% comment %}
+  Maykey Hair Care — 404 Not Found Section
+{% endcomment %}
+<section class="section error-404-section" style="text-align: center; padding: 100px 0;">
+  <div class="container">
+    <div class="section-eyebrow center">404 Error</div>
+    <h1 class="section-title" style="margin-bottom: 16px;">Page Not Found</h1>
+    <p class="section-subtitle" style="margin: 0 auto 32px; text-align: center;">
+      The page you were looking for doesn't exist or has been moved.
+    </p>
+    <a href="{{ routes.root_url }}" class="btn-primary">
+      <span>Return Home</span>
+      {% render 'icon-chevron', size: 14 %}
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404 Page",
+  "settings": []
+}
+{% endschema %}

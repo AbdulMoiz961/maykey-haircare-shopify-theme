@@ -1,0 +1,71 @@
+{% comment %}
+  Maykey Hair Care — Reusable Product Card
+  Accepts:
+    - product: Product object
+    - show_quick_add: Boolean (default: true)
+{% endcomment %}
+{%- assign show_quick_add = show_quick_add | default: true -%}
+
+<div class="product-card" data-product-id="{{ product.id }}">
+  <div class="product-card-media">
+    <a href="{{ product.url }}" class="product-card-link" aria-label="{{ product.title | escape }}">
+      {%- if product.featured_media -%}
+        <img
+          src="{{ product.featured_media | image_url: width: 600 }}"
+          alt="{{ product.featured_media.alt | default: product.title | escape }}"
+          class="product-card-img"
+          loading="lazy"
+          width="400"
+          height="400"
+        >
+      {%- else -%}
+        <div class="product-card-placeholder">
+          {% render 'icon-bottle', size: 48 %}
+        </div>
+      {%- endif -%}
+    </a>
+
+    {%- if product.compare_at_price > product.price -%}
+      {%- assign save_pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+      <span class="product-card-save-badge">Save {{ save_pct }}%</span>
+    {%- endif -%}
+  </div>
+
+  <div class="product-card-body">
+    {%- if product.metafields.custom.format_subtitle != blank -%}
+      <div class="product-card-subtitle">{{ product.metafields.custom.format_subtitle }}</div>
+    {%- elsif product.type != blank -%}
+      <div class="product-card-subtitle">{{ product.type }}</div>
+    {%- endif -%}
+
+    <h3 class="product-card-title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    <div class="product-card-price-row">
+      <span class="product-card-price">{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-card-compare-price">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- if show_quick_add -%}
+      {%- if product.variants.size > 1 -%}
+        <a href="{{ product.url }}" class="btn-card-action">
+          {{ 'products.product.choose_shade' | default: 'Choose Shade' }}
+        </a>
+      {%- else -%}
+        <form action="{{ routes.cart_add_url }}" method="post" class="quick-add-form">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          <button type="submit" class="btn-card-action" {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}
+              {{ 'products.product.add_to_cart' | default: 'Add to Cart' }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | default: 'Sold Out' }}
+            {%- endif -%}
+          </button>
+        </form>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>

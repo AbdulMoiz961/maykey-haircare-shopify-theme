@@ -1,0 +1,117 @@
+{% comment %}
+  Maykey Hair Care — FAQ Accordion Section
+{% endcomment %}
+<section class="section faq-section" id="faqSection">
+  <div class="container">
+    <div class="faq-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="section-eyebrow center">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+
+      <h2 class="section-title">{{ section.settings.headline }}</h2>
+    </div>
+
+    <div class="faq-list" role="list">
+      {%- for block in section.blocks -%}
+        <div class="faq-item {% if forloop.first %}open{% endif %}" role="listitem" {{ block.shopify_attributes }}>
+          <button
+            type="button"
+            class="faq-question-btn"
+            aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+          >
+            <span>{{ block.settings.question }}</span>
+            <div class="faq-chevron-wrap" aria-hidden="true">
+              {% render 'icon-chevron', size: 12 %}
+            </div>
+          </button>
+
+          <div class="faq-answer-panel" role="region">
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Got Questions?"
+    },
+    {
+      "type": "html",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Frequently Asked<br/><em>Questions</em>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Question & Answer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How well does it cover gray hair?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Maykey Hair Darkening Shampoo provides excellent gray coverage — Natural Black and Dark Brown offer up to 100% coverage, while Light Brown provides natural-looking blending for lighter grays."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How well does it cover gray hair?",
+            "answer": "Maykey Hair Darkening Shampoo provides excellent gray coverage — Natural Black and Dark Brown offer up to 100% coverage, while Light Brown provides natural-looking blending for lighter grays. Results may vary based on hair porosity and percentage of gray. For best results, use consistently every 1–2 weeks."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it safe for sensitive scalps?",
+            "answer": "Our formula is 100% ammonia-free, making it significantly gentler than traditional permanent dyes. However, we strongly recommend performing a 24–48 hour patch test before first use. Apply a small amount behind your ear or on your inner elbow."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does the color last?",
+            "answer": "Color typically lasts 2–4 weeks depending on your hair's porosity, washing frequency, and sun exposure. Because it's a semi-permanent formula, the color fades naturally without harsh regrowth lines."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer Cash on Delivery (COD)?",
+            "answer": "Yes! Cash on Delivery (COD) is available across Pakistan — including Karachi, Lahore, Islamabad, Rawalpindi, Faisalabad, Peshawar, and all other cities. Orders above Rs. 2,500 qualify for free shipping."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can men use this product too?",
+            "answer": "Absolutely. Maykey Hair Darkening Shampoo is formulated for both men and women. It is especially popular among men for quick, hassle-free temple and gray coverage during their regular shower routine."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

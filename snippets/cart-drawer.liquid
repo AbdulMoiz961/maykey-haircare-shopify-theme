@@ -1,0 +1,146 @@
+{% comment %}
+  Maykey Hair Care — AJAX Slide-In Cart Drawer
+{% endcomment %}
+{%- assign free_shipping_threshold = settings.free_shipping_threshold | default: 250000 -%}
+{%- assign cart_total = cart.total_price -%}
+{%- assign remaining_for_free_shipping = free_shipping_threshold | minus: cart_total -%}
+
+<div
+  class="cart-drawer-overlay"
+  id="cartDrawerOverlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="{{ 'cart.general.title' | default: 'Shopping Cart' }}"
+>
+  <div class="cart-drawer" id="cartDrawer" onclick="event.stopPropagation()">
+    <!-- Header -->
+    <div class="cart-drawer-head">
+      <h3 class="cart-drawer-title">
+        {{ 'cart.general.title' | default: 'Your Cart' }}
+        <span class="cart-count-badge" id="cartDrawerCount">({{ cart.item_count }})</span>
+      </h3>
+      <button
+        type="button"
+        class="cart-close-btn"
+        id="cartDrawerCloseBtn"
+        aria-label="{{ 'general.accessibility.close' | default: 'Close cart' }}"
+      >
+        {% render 'icon-close', size: 18 %}
+      </button>
+    </div>
+
+    <!-- Free Shipping Progress Bar -->
+    <div class="cart-free-shipping-bar" id="cartFreeShippingBar">
+      {%- if remaining_for_free_shipping <= 0 -%}
+        <div class="free-shipping-msg qualified">
+          {% render 'icon-check', size: 14 %}
+          <span><strong>{{ 'cart.shipping.unlocked' | default: 'Congratulations! You unlocked Free Nationwide Delivery!' }}</strong></span>
+        </div>
+      {%- else -%}
+        {%- assign progress_pct = cart_total | times: 100 | divided_by: free_shipping_threshold -%}
+        <div class="free-shipping-msg">
+          <span>Add <strong>{{ remaining_for_free_shipping | money }}</strong> more to unlock <strong>Free Delivery</strong></span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuenow="{{ progress_pct }}" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-fill" style="width: {{ progress_pct | clamp: 0, 100 }}%;"></div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Cart Body / Items -->
+    <div class="cart-drawer-body" id="cartDrawerBody">
+      {%- if cart.item_count == 0 -%}
+        <div class="cart-empty-state">
+          <div class="cart-empty-icon">
+            {% render 'icon-cart', size: 36 %}
+          </div>
+          <p class="cart-empty-title">{{ 'cart.general.empty' | default: 'Your cart is empty' }}</p>
+          <p class="cart-empty-subtext">{{ 'cart.general.empty_subtext' | default: 'Explore our 15-minute hair darkening solutions.' }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn-primary cart-empty-btn">
+            {{ 'cart.general.continue_shopping' | default: 'Shop Shades' }}
+          </a>
+        </div>
+      {%- else -%}
+        <form action="{{ routes.cart_url }}" method="post" id="cartDrawerForm" class="cart-items-list">
+          {%- for item in cart.items -%}
+            <div class="cart-item" data-line="{{ forloop.index }}" data-key="{{ item.key }}">
+              <div class="cart-item-img-wrap">
+                {%- if item.image -%}
+                  <img
+                    src="{{ item.image | image_url: width: 180 }}"
+                    alt="{{ item.title | escape }}"
+                    class="cart-item-img"
+                    loading="lazy"
+                    width="80"
+                    height="80"
+                  >
+                {%- else -%}
+                  <div class="cart-item-placeholder">
+                    {% render 'icon-bottle', size: 24 %}
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <div class="cart-item-info">
+                <a href="{{ item.url }}" class="cart-item-name">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <div class="cart-item-variant">{{ item.variant.title }}</div>
+                {%- endunless -%}
+
+                <div class="cart-item-pricing-row">
+                  <div class="cart-qty-selector">
+                    <button
+                      type="button"
+                      class="qty-btn minus"
+                      data-action="decrease"
+                      aria-label="Decrease quantity"
+                    >–</button>
+                    <input
+                      type="number"
+                      name="updates[]"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      class="qty-input"
+                      data-key="{{ item.key }}"
+                      aria-label="Item quantity"
+                    >
+                    <button
+                      type="button"
+                      class="qty-btn plus"
+                      data-action="increase"
+                      aria-label="Increase quantity"
+                    >+</button>
+                  </div>
+                  <span class="cart-item-price">{{ item.final_line_price | money }}</span>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </form>
+      {%- endif -%}
+    </div>
+
+    <!-- Cart Footer -->
+    {%- if cart.item_count > 0 -%}
+      <div class="cart-drawer-foot" id="cartDrawerFoot">
+        <div class="cart-subtotal-row">
+          <span class="subtotal-label">{{ 'cart.general.subtotal' | default: 'Subtotal' }}</span>
+          <span class="subtotal-amount" id="cartDrawerSubtotal">{{ cart.total_price | money }}</span>
+        </div>
+        <p class="cart-tax-shipping-note">
+          {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | default: 'Taxes included. Delivery calculated at checkout.' }}
+        </p>
+
+        <a href="{{ routes.cart_url }}/checkout" class="btn-primary btn-cart-checkout">
+          <span>{{ 'cart.general.checkout' | default: 'Proceed to Checkout' }}</span>
+          {% render 'icon-chevron', size: 14 %}
+        </a>
+
+        <div class="cart-cod-badge">
+          {% render 'icon-package', size: 14 %}
+          <span>{{ settings.cod_notice_text | default: 'Cash on Delivery Available Across Pakistan' }}</span>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

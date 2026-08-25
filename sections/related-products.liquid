@@ -1,0 +1,63 @@
+{% comment %}
+  Maykey Hair Care — Related Products / Recommendations Section
+{% endcomment %}
+<section class="section related-products-section" id="relatedProductsSection">
+  <div class="container">
+    <div class="shade-header-row" style="margin-bottom: 24px;">
+      <h2 class="section-title" style="font-size: 32px;">{{ section.settings.heading | default: 'You May Also Like' }}</h2>
+    </div>
+
+    <div class="product-grid">
+      {%- if section.settings.custom_collection != blank -%}
+        {%- for product in section.settings.custom_collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product, show_quick_add: true %}
+        {%- endfor -%}
+      {%- elsif collection -%}
+        {%- for prod in collection.products limit: section.settings.products_to_show -%}
+          {%- unless prod.id == product.id -%}
+            {% render 'product-card', product: prod, show_quick_add: true %}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for prod in collections.all.products limit: section.settings.products_to_show -%}
+          {%- unless prod.id == product.id -%}
+            {% render 'product-card', product: prod, show_quick_add: true %}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Related Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You May Also Like"
+    },
+    {
+      "type": "collection",
+      "id": "custom_collection",
+      "label": "Collection to Pull From"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Products to Show",
+      "default": 3
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related Products"
+    }
+  ]
+}
+{% endschema %}

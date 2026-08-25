@@ -1,0 +1,232 @@
+{% comment %}
+  Maykey Hair Care — Split Screen Hero Banner
+{% endcomment %}
+<section class="hero-section" id="heroSection">
+  <div class="container hero-grid">
+    <!-- LEFT: Editorial Copy -->
+    <div class="hero-copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+
+      <h1 class="hero-headline">
+        {{ section.settings.headline }}
+      </h1>
+
+      {%- if section.settings.subline != blank -%}
+        <p class="hero-subline">{{ section.settings.subline }}</p>
+      {%- endif -%}
+
+      <!-- Benefit Badges -->
+      <div class="hero-badges-row">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'badge' -%}
+            <div class="hero-pill-badge {% if block.settings.is_olive %}olive{% endif %}" {{ block.shopify_attributes }}>
+              {% render 'icon-leaf', size: 12 %}
+              <span>{{ block.settings.text }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="hero-cta-group">
+        {%- if section.settings.btn_1_text != blank -%}
+          <a href="{{ section.settings.btn_1_link }}" class="btn-primary">
+            <span>{{ section.settings.btn_1_text }}</span>
+            {% render 'icon-chevron', size: 14 %}
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.btn_2_text != blank -%}
+          <a href="{{ section.settings.btn_2_link }}" class="btn-secondary">
+            <span>{{ section.settings.btn_2_text }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- 15-Minute Timer Callout -->
+      {%- if section.settings.timer_text != blank -%}
+        <div class="hero-timer-note">
+          <div class="hero-timer-icon-wrap">
+            {% render 'icon-clock', size: 16 %}
+          </div>
+          <span>{{ section.settings.timer_text }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- RIGHT: Product Visual & Switcher -->
+    <div class="hero-media-wrap">
+      <!-- Floating Benefit Cards -->
+      <div class="hero-float-badge top-left">
+        <div class="float-icon-box olive">
+          {% render 'icon-package', size: 16 %}
+        </div>
+        <span>{{ section.settings.float_1_text | default: 'Cash on Delivery' }}</span>
+      </div>
+
+      <div class="hero-float-badge top-right">
+        <div class="float-icon-box gold">
+          {% render 'icon-shield', size: 16 %}
+        </div>
+        <span>{{ section.settings.float_2_text | default: '0% Ammonia' }}</span>
+      </div>
+
+      <!-- Tab Content: Bottle (Default) -->
+      <div class="hero-tab-content" id="heroBottle" style="display: flex; align-items: center; justify-content: center; width: 100%;">
+        {%- if section.settings.bottle_image != blank -%}
+          <img
+            src="{{ section.settings.bottle_image | image_url: width: 800 }}"
+            alt="{{ section.settings.bottle_image.alt | default: 'Maykey 250ml Bottle' }}"
+            class="hero-media-img"
+            width="400"
+            height="500"
+          >
+        {%- else -%}
+          <div class="product-card-placeholder" style="width: 320px; height: 440px; background: rgba(255,255,255,0.4); border-radius: var(--radius-xl); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 2px dashed var(--border);">
+            {% render 'icon-bottle', size: 56 %}
+            <strong style="font-family: var(--font-serif); font-size: 20px;">250ml Pump Bottle</strong>
+            <span style="font-size: 12px; color: var(--subtle);">Upload Studio Packshot in Theme Editor</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Tab Content: Sachet -->
+      <div class="hero-tab-content" id="heroSachet" style="display: none; align-items: center; justify-content: center; width: 100%;">
+        {%- if section.settings.sachet_image != blank -%}
+          <img
+            src="{{ section.settings.sachet_image | image_url: width: 800 }}"
+            alt="{{ section.settings.sachet_image.alt | default: 'Maykey 30ml Sachet' }}"
+            class="hero-media-img"
+            width="400"
+            height="500"
+          >
+        {%- else -%}
+          <div class="product-card-placeholder" style="width: 320px; height: 440px; background: rgba(255,255,255,0.4); border-radius: var(--radius-xl); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 2px dashed var(--border);">
+            {% render 'icon-package', size: 56 %}
+            <strong style="font-family: var(--font-serif); font-size: 20px;">30ml Sachet Pack</strong>
+            <span style="font-size: 12px; color: var(--subtle);">Upload Sachet Packshot in Theme Editor</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Switcher Buttons -->
+      <div class="hero-product-switcher" role="tablist" aria-label="Product format switcher">
+        <button type="button" class="switcher-tab-btn active" data-target="heroBottle" role="tab" aria-selected="true">
+          250ml Bottle
+        </button>
+        <button type="button" class="switcher-tab-btn" data-target="heroSachet" role="tab" aria-selected="false">
+          30ml Sachet
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Hair Darkening Shampoo"
+    },
+    {
+      "type": "html",
+      "id": "headline",
+      "label": "Headline (HTML supported)",
+      "default": "Gray Coverage<br/>in <em>15 Minutes.</em><br/>Naturally."
+    },
+    {
+      "type": "textarea",
+      "id": "subline",
+      "label": "Subline",
+      "default": "Ammonia-free formula enriched with Argan Oil, Biotin & Keratin. Shampoo in, gray out — without compromising hair health."
+    },
+    {
+      "type": "text",
+      "id": "btn_1_text",
+      "label": "Primary Button Text",
+      "default": "Shop 250ml Bottle"
+    },
+    {
+      "type": "url",
+      "id": "btn_1_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_text",
+      "label": "Secondary Button Text",
+      "default": "Try Sachet Pack"
+    },
+    {
+      "type": "url",
+      "id": "btn_2_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "html",
+      "id": "timer_text",
+      "label": "Timer Note",
+      "default": "Works in just <strong>15 minutes</strong> — from application to rinse"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottle_image",
+      "label": "250ml Bottle Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "sachet_image",
+      "label": "30ml Sachet Image"
+    },
+    {
+      "type": "text",
+      "id": "float_1_text",
+      "label": "Top-Left Floating Tag",
+      "default": "Cash on Delivery"
+    },
+    {
+      "type": "text",
+      "id": "float_2_text",
+      "label": "Top-Right Floating Tag",
+      "default": "0% Ammonia"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Benefit Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Badge Text",
+          "default": "0% Ammonia"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_olive",
+          "label": "Olive Green Styling",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "blocks": [
+        { "type": "badge", "settings": { "text": "0% Ammonia", "is_olive": false } },
+        { "type": "badge", "settings": { "text": "Fast 15 Mins", "is_olive": false } },
+        { "type": "badge", "settings": { "text": "Argan Oil Enriched", "is_olive": true } },
+        { "type": "badge", "settings": { "text": "Keratin Repair", "is_olive": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,72 @@
+{% comment %}
+  Maykey Hair Care — CSS Variables & Design Tokens
+  Injected into <head> for fast initial render and dynamic customizer support
+{% endcomment %}
+<style>
+  :root {
+    /* Base Color Tokens */
+    --alabaster: {{ settings.color_bg | default: '#F9F8F6' }};
+    --linen: {{ settings.color_bg_alt | default: '#F3EFEA' }};
+    --linen-dark: {{ settings.color_bg_deep | default: '#EAE4DB' }};
+
+    --onyx: {{ settings.color_text_primary | default: '#1A1A1A' }};
+    --charcoal: {{ settings.color_text_secondary | default: '#2C2C2C' }};
+    --muted: {{ settings.color_text_muted | default: '#6B6B6B' }};
+    --subtle: {{ settings.color_text_subtle | default: '#9A9A9A' }};
+
+    --gold: {{ settings.color_accent_gold | default: '#C5A059' }};
+    --gold-light: {{ settings.color_accent_gold_light | default: '#D4B47A' }};
+    --gold-dark: {{ settings.color_accent_gold_dark | default: '#A8893E' }};
+
+    --olive: {{ settings.color_accent_olive | default: '#4A5D3E' }};
+    --olive-light: {{ settings.color_accent_olive_light | default: '#5C7250' }};
+    --olive-pale: {{ settings.color_accent_olive_pale | default: '#EEF2EB' }};
+
+    --border: {{ settings.color_border | default: '#DDD8D0' }};
+    --border-light: {{ settings.color_border_light | default: '#EAE6DF' }};
+
+    --white: #FFFFFF;
+    --whatsapp: #25D366;
+    --success: #2D6A4F;
+
+    /* Hair Shade Tokens */
+    --shade-natural-black: #1C1008;
+    --shade-dark-brown: #3B1F0A;
+    --shade-light-brown: #7B4A1E;
+
+    /* Typography */
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+    /* Spacing Scale */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+
+    /* Radii */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(26, 26, 26, 0.08);
+    --shadow-md: 0 4px 16px rgba(26, 26, 26, 0.10);
+    --shadow-lg: 0 12px 40px rgba(26, 26, 26, 0.14);
+    --shadow-product: 0 20px 60px rgba(26, 26, 26, 0.16);
+
+    /* Animation Transitions */
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  }
+</style>

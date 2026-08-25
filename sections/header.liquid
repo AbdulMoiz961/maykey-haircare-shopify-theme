@@ -1,0 +1,123 @@
+{% comment %}
+  Maykey Hair Care — Sticky Header Section
+{% endcomment %}
+<header class="site-header-wrapper" id="siteHeader">
+  <div class="container site-header">
+    <!-- Logo -->
+    <div class="header-logo">
+      <a href="{{ routes.root_url }}" class="header-logo-link" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: 300 }}"
+            alt="{{ section.settings.logo.alt | default: shop.name }}"
+            class="header-logo-img"
+            width="{{ section.settings.logo_width }}"
+            height="auto"
+          >
+        {%- else -%}
+          <span class="header-logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="header-nav" role="navigation" aria-label="Primary Navigation">
+      <ul class="header-nav-list">
+        {%- for link in section.settings.menu.links -%}
+          {%- if link.title contains 'Shade' or link.title contains 'shades' -%}
+            <li class="shade-dropdown">
+              <button
+                type="button"
+                class="shade-dropdown-trigger"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span>{{ link.title }}</span>
+                {% render 'icon-chevron', size: 12 %}
+              </button>
+              <div class="shade-dropdown-menu" role="menu">
+                <a href="/products/maykey-hair-darkening-shampoo-250ml?variant=natural-black" class="shade-dropdown-item" role="menuitem">
+                  <div class="shade-swatch-circle" style="background-color: var(--shade-natural-black);"></div>
+                  <span>Natural Black</span>
+                </a>
+                <a href="/products/maykey-hair-darkening-shampoo-250ml?variant=dark-brown" class="shade-dropdown-item" role="menuitem">
+                  <div class="shade-swatch-circle" style="background-color: var(--shade-dark-brown);"></div>
+                  <span>Dark Brown</span>
+                </a>
+                <a href="/products/maykey-hair-darkening-shampoo-250ml?variant=light-brown" class="shade-dropdown-item" role="menuitem">
+                  <div class="shade-swatch-circle" style="background-color: var(--shade-light-brown);"></div>
+                  <span>Light Brown</span>
+                </a>
+              </div>
+            </li>
+          {%- else -%}
+            <li>
+              <a href="{{ link.url }}" class="header-nav-link">
+                {{ link.title }}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <a href="{{ routes.search_url }}" class="header-icon-btn" aria-label="Search">
+        {% render 'icon-search', size: 20 %}
+      </a>
+
+      <button
+        type="button"
+        class="header-icon-btn"
+        data-cart-drawer-trigger
+        aria-label="Cart ({{ cart.item_count }} items)"
+      >
+        {% render 'icon-cart', size: 20 %}
+        <span class="header-cart-badge">{{ cart.item_count }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="mobile-menu-toggle"
+        id="mobileMenuToggle"
+        aria-label="Open mobile menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo Width",
+      "default": 130
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

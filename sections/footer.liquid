@@ -1,0 +1,118 @@
+{% comment %}
+  Maykey Hair Care — Footer Section
+{% endcomment %}
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand Column -->
+      <div class="footer-brand-col">
+        <h3 class="footer-brand-title">{{ section.settings.brand_title | default: shop.name }}</h3>
+        <p class="footer-brand-desc">{{ section.settings.brand_desc }}</p>
+
+        {%- assign whatsapp_number = settings.whatsapp_number | default: '923000000000' -%}
+        <a
+          href="https://wa.me/{{ whatsapp_number }}"
+          class="footer-whatsapp-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {% render 'icon-chat', size: 18 %}
+          <span>{{ section.settings.whatsapp_btn_text | default: 'Chat on WhatsApp' }}</span>
+        </a>
+      </div>
+
+      <!-- Menu Columns -->
+      {%- for block in section.blocks -%}
+        <div class="footer-nav-col" {{ block.shopify_attributes }}>
+          <h4 class="footer-heading">{{ block.settings.heading }}</h4>
+          {%- if block.settings.menu != blank -%}
+            <ul class="footer-links-list">
+              {%- for link in block.settings.menu.links -%}
+                <li>
+                  <a href="{{ link.url }}" class="footer-link">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text | default: 'All rights reserved. Made in Pakistan.' }}
+      </p>
+
+      <div class="footer-payment-chips" aria-label="Payment methods accepted">
+        <span class="payment-chip">Cash on Delivery</span>
+        <span class="payment-chip">Easypaisa</span>
+        <span class="payment-chip">JazzCash</span>
+        <span class="payment-chip">Bank Transfer</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_title",
+      "label": "Brand Title",
+      "default": "Maykey Hair Care"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_desc",
+      "label": "Brand Description",
+      "default": "Premium hair darkening solutions crafted with botanical actives. Fast 15-minute color — ammonia-free, nourishing, and long-lasting."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_btn_text",
+      "label": "WhatsApp Button Text",
+      "default": "Chat on WhatsApp"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Subtext",
+      "default": "All rights reserved. Made in Pakistan."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Footer Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Column Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu Linklist"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "menu", "settings": { "heading": "Shop" } },
+        { "type": "menu", "settings": { "heading": "Learn" } },
+        { "type": "menu", "settings": { "heading": "Support" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

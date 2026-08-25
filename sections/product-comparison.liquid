@@ -1,0 +1,222 @@
+{% comment %}
+  Maykey Hair Care — Product Format Comparison Section
+{% endcomment %}
+<section class="section comparison-section" id="comparisonSection">
+  <div class="container">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+
+    <h2 class="section-title">
+      {{ section.settings.headline }}
+    </h2>
+
+    {%- if section.settings.subline != blank -%}
+      <p class="section-subtitle">{{ section.settings.subline }}</p>
+    {%- endif -%}
+
+    <div class="comparison-grid">
+      {%- for block in section.blocks -%}
+        <div class="comparison-card {% if block.settings.is_featured %}featured{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.badge_text != blank -%}
+            <div class="comparison-badge">
+              {% render 'icon-star', size: 10 %}
+              <span>{{ block.settings.badge_text }}</span>
+            </div>
+          {%- endif -%}
+
+          <h3 class="comparison-card-title">{{ block.settings.title }}</h3>
+          <p class="comparison-card-subhead">{{ block.settings.subhead }}</p>
+
+          <div class="comparison-img-wrap">
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 600 }}"
+                alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                class="comparison-img"
+                loading="lazy"
+                width="300"
+                height="220"
+              >
+            {%- else -%}
+              <div class="product-card-placeholder" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--linen); border-radius: var(--radius-md);">
+                {% render 'icon-bottle', size: 48 %}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <ul class="comparison-feature-list">
+            {%- if block.settings.feat_1 != blank -%}
+              <li class="comparison-feature-item">
+                <div class="comparison-feature-check">{% render 'icon-check', size: 10 %}</div>
+                <span>{{ block.settings.feat_1 }}</span>
+              </li>
+            {%- endif -%}
+            {%- if block.settings.feat_2 != blank -%}
+              <li class="comparison-feature-item">
+                <div class="comparison-feature-check">{% render 'icon-check', size: 10 %}</div>
+                <span>{{ block.settings.feat_2 }}</span>
+              </li>
+            {%- endif -%}
+            {%- if block.settings.feat_3 != blank -%}
+              <li class="comparison-feature-item">
+                <div class="comparison-feature-check">{% render 'icon-check', size: 10 %}</div>
+                <span>{{ block.settings.feat_3 }}</span>
+              </li>
+            {%- endif -%}
+            {%- if block.settings.feat_4 != blank -%}
+              <li class="comparison-feature-item">
+                <div class="comparison-feature-check">{% render 'icon-check', size: 10 %}</div>
+                <span>{{ block.settings.feat_4 }}</span>
+              </li>
+            {%- endif -%}
+          </ul>
+
+          {%- if block.settings.btn_link != blank -%}
+            <a
+              href="{{ block.settings.btn_link }}"
+              class="{% if block.settings.is_featured %}btn-primary{% else %}btn-secondary{% endif %}"
+              style="display: flex; width: 100%;"
+            >
+              <span>{{ block.settings.btn_text | default: 'Shop Format' }}</span>
+              {% render 'icon-chevron', size: 14 %}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Two Formats. One Solution."
+    },
+    {
+      "type": "html",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Find the <em>Right Format</em><br/>for Your Routine"
+    },
+    {
+      "type": "textarea",
+      "id": "subline",
+      "label": "Subline",
+      "default": "Whether you're traveling or coloring weekly — we have the perfect size."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Format Card",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "is_featured",
+          "label": "Highlight as Best Value (Gold border)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Optional Badge Text (e.g. Best Value)",
+          "default": "★ Best Value"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "250ml Pump Bottle"
+        },
+        {
+          "type": "text",
+          "id": "subhead",
+          "label": "Subtitle",
+          "default": "Multi-Application Value · For Men & Women"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Packshot"
+        },
+        {
+          "type": "html",
+          "id": "feat_1",
+          "label": "Feature 1",
+          "default": "<strong>8+ applications</strong> per bottle"
+        },
+        {
+          "type": "html",
+          "id": "feat_2",
+          "label": "Feature 2",
+          "default": "Premium pump dispenser — no mess"
+        },
+        {
+          "type": "html",
+          "id": "feat_3",
+          "label": "Feature 3",
+          "default": "3 shades: Natural Black, Dark Brown, Light Brown"
+        },
+        {
+          "type": "html",
+          "id": "feat_4",
+          "label": "Feature 4",
+          "default": "Suitable for Men & Women"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button Text",
+          "default": "Shop 250ml Bottle"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Comparison",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "is_featured": false,
+            "badge_text": "",
+            "title": "30ml Sachet Pack",
+            "subhead": "Travel & Quick Touch-ups · Single-Use",
+            "feat_1": "Perfect for travel & on-the-go",
+            "feat_2": "Try before committing to full bottle",
+            "feat_3": "Single-use convenience",
+            "feat_4": "Same premium botanical formula",
+            "btn_text": "Shop Sachet Pack"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "is_featured": true,
+            "badge_text": "★ Best Value",
+            "title": "250ml Pump Bottle",
+            "subhead": "Multi-Application Value · For Men & Women",
+            "feat_1": "<strong>8+ applications</strong> per bottle",
+            "feat_2": "Premium pump dispenser — no mess",
+            "feat_3": "3 rich shades for natural coverage",
+            "feat_4": "Ammonia-free with Argan Oil & Keratin",
+            "btn_text": "Shop 250ml Bottle"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

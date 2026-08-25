@@ -1,0 +1,79 @@
+{% comment %}
+  Maykey Hair Care — 5-Item Trust Bar Section
+{% endcomment %}
+<section class="trust-bar-section">
+  <div class="container trust-bar-grid">
+    {%- for block in section.blocks -%}
+      <div class="trust-card" {{ block.shopify_attributes }}>
+        <div class="trust-icon-wrap">
+          {%- case block.settings.icon -%}
+            {%- when 'package' -%}
+              {% render 'icon-package', size: 18 %}
+            {%- when 'truck' -%}
+              {% render 'icon-truck', size: 18 %}
+            {%- when 'clock' -%}
+              {% render 'icon-clock', size: 18 %}
+            {%- when 'shield' -%}
+              {% render 'icon-shield', size: 18 %}
+            {%- when 'chat' -%}
+              {% render 'icon-chat', size: 18 %}
+          {%- endcase -%}
+        </div>
+        <h4 class="trust-title">{{ block.settings.title }}</h4>
+        <p class="trust-subtext">{{ block.settings.subtext }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Bar",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "package", "label": "Package (COD)" },
+            { "value": "truck", "label": "Truck (Free Shipping)" },
+            { "value": "clock", "label": "Clock (15 Minutes)" },
+            { "value": "shield", "label": "Shield (0% Ammonia)" },
+            { "value": "chat", "label": "Chat (WhatsApp)" }
+          ],
+          "default": "package"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Cash on Delivery"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "Available Nationwide"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Bar",
+      "blocks": [
+        { "type": "trust_item", "settings": { "icon": "package", "title": "Cash on Delivery", "subtext": "Available Nationwide" } },
+        { "type": "trust_item", "settings": { "icon": "truck", "title": "Free Delivery", "subtext": "Orders above Rs. 2,500" } },
+        { "type": "trust_item", "settings": { "icon": "clock", "title": "15-Minute Results", "subtext": "Fast color treatment" } },
+        { "type": "trust_item", "settings": { "icon": "shield", "title": "0% Ammonia", "subtext": "Safe for all hair types" } },
+        { "type": "trust_item", "settings": { "icon": "chat", "title": "WhatsApp Support", "subtext": "Mon–Sat, 9am–9pm" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

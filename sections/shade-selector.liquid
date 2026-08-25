@@ -1,0 +1,190 @@
+{% comment %}
+  Maykey Hair Care — Shade Selector Showcase Section
+{% endcomment %}
+<section class="section shade-section" id="shadesSection">
+  <div class="container">
+    <div class="shade-header-row">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.headline }}</h2>
+      </div>
+      {%- if section.settings.subline != blank -%}
+        <p class="section-subtitle" style="text-align: right; max-width: 340px;">
+          {{ section.settings.subline }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <!-- Shade Navigation Tabs -->
+    <div class="shade-tabs-nav" role="group" aria-label="Shade Filter Tabs">
+      {%- for block in section.blocks -%}
+        <button
+          type="button"
+          class="shade-tab-pill {% if forloop.first %}active{% endif %}"
+          aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.title }}
+        </button>
+      {%- endfor -%}
+    </div>
+
+    <!-- Shade Cards Grid -->
+    <div class="shade-cards-grid">
+      {%- for block in section.blocks -%}
+        <div class="shade-card {% if forloop.first %}active{% endif %}" data-shade-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div
+            class="shade-color-bar"
+            style="background: {{ block.settings.gradient | default: 'linear-gradient(135deg, #1C1008 0%, #0D0805 100%)' }};"
+            role="img"
+            aria-label="{{ block.settings.title }} color swatch"
+          ></div>
+          <div class="shade-card-body">
+            <div class="shade-card-code">{{ block.settings.code | default: 'Shade' }}</div>
+            <h3 class="shade-card-name">{{ block.settings.title }}</h3>
+            <p class="shade-card-desc">{{ block.settings.description }}</p>
+
+            <div class="shade-pill-row">
+              {%- if block.settings.tag_1 != blank -%}
+                <span class="shade-pill-tag">{{ block.settings.tag_1 }}</span>
+              {%- endif -%}
+              {%- if block.settings.tag_2 != blank -%}
+                <span class="shade-pill-tag">{{ block.settings.tag_2 }}</span>
+              {%- endif -%}
+            </div>
+
+            <a
+              href="{{ block.settings.product_link | default: '/products/maykey-hair-darkening-shampoo-250ml' }}"
+              class="shade-select-btn"
+            >
+              {{ block.settings.btn_text | default: 'Select Shade →' }}
+            </a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shade Selector",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Choose Your Shade"
+    },
+    {
+      "type": "html",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Your Color,<br/><em>Your Identity</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "subline",
+      "label": "Subline",
+      "default": "All shades are ammonia-free and deliver rich, lasting coverage in just 15 minutes."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "shade",
+      "name": "Shade Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "code",
+          "label": "Shade Code",
+          "default": "Shade 001"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Shade Name",
+          "default": "Natural Black"
+        },
+        {
+          "type": "color_background",
+          "id": "gradient",
+          "label": "Swatch Gradient",
+          "default": "linear-gradient(135deg, #1C1008 0%, #0D0805 50%, #2A1810 100%)"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Deep, rich black with warm undertones. Provides 100% gray coverage with a natural-looking finish."
+        },
+        {
+          "type": "text",
+          "id": "tag_1",
+          "label": "Benefit Tag 1",
+          "default": "100% Gray Coverage"
+        },
+        {
+          "type": "text",
+          "id": "tag_2",
+          "label": "Benefit Tag 2",
+          "default": "Warm Undertone"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button Text",
+          "default": "Select Shade →"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shade Selector",
+      "blocks": [
+        {
+          "type": "shade",
+          "settings": {
+            "code": "Shade 001",
+            "title": "Natural Black",
+            "gradient": "linear-gradient(135deg, #1C1008 0%, #0D0805 50%, #2A1810 100%)",
+            "description": "Deep, rich black with warm undertones. Provides 100% gray coverage with a natural-looking finish.",
+            "tag_1": "100% Gray Coverage",
+            "tag_2": "Warm Undertone"
+          }
+        },
+        {
+          "type": "shade",
+          "settings": {
+            "code": "Shade 002",
+            "title": "Dark Brown",
+            "gradient": "linear-gradient(135deg, #3B1F0A 0%, #2A1508 50%, #4A2810 100%)",
+            "description": "Rich espresso brown with golden undertones. Adds depth and warmth while covering gray seamlessly.",
+            "tag_1": "Golden Undertone",
+            "tag_2": "Deep Coverage"
+          }
+        },
+        {
+          "type": "shade",
+          "settings": {
+            "code": "Shade 003",
+            "title": "Light Brown",
+            "gradient": "linear-gradient(135deg, #7B4A1E 0%, #6B3D18 50%, #8F5828 100%)",
+            "description": "Soft caramel brown with warm, sun-kissed tones. Ideal for lighter coverage and a natural, radiant look.",
+            "tag_1": "Caramel Tones",
+            "tag_2": "Lighter Coverage"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

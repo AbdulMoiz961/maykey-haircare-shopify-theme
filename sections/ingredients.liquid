@@ -1,0 +1,164 @@
+{% comment %}
+  Maykey Hair Care — Botanical Ingredients Section (Dark Theme)
+{% endcomment %}
+<section class="section ingredients-section" id="ingredientsSection">
+  <div class="container">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+
+    <h2 class="section-title">{{ section.settings.headline }}</h2>
+
+    {%- if section.settings.subline != blank -%}
+      <p class="section-subtitle">{{ section.settings.subline }}</p>
+    {%- endif -%}
+
+    <div class="ingredients-grid">
+      {%- for block in section.blocks -%}
+        <div class="ingredient-card" {{ block.shopify_attributes }}>
+          <div class="ingredient-icon-box">
+            {%- case block.settings.icon -%}
+              {%- when 'leaf' -%}
+                {% render 'icon-leaf', size: 26 %}
+              {%- when 'shield' -%}
+                {% render 'icon-shield', size: 26 %}
+              {%- when 'science' -%}
+                {% render 'icon-science', size: 26 %}
+              {%- when 'sparkle' -%}
+                {% render 'icon-sparkle', size: 26 %}
+              {%- else -%}
+                {% render 'icon-leaf', size: 26 %}
+            {%- endcase -%}
+          </div>
+
+          <h3 class="ingredient-title">{{ block.settings.title }}</h3>
+          <div class="ingredient-latin">{{ block.settings.latin_name }}</div>
+          <p class="ingredient-desc">{{ block.settings.description }}</p>
+
+          {%- if block.settings.benefit != blank -%}
+            <div class="ingredient-benefit-tag">
+              <span>{{ block.settings.benefit }}</span>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ingredients (Dark)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Formulation"
+    },
+    {
+      "type": "html",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Science-Backed.<br/><em>Botanically Enriched.</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "subline",
+      "label": "Subline",
+      "default": "Every bottle carries a carefully curated blend of active ingredients that color and care simultaneously."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf (Botanical / Argan / Olive)" },
+            { "value": "shield", "label": "Shield (Protection / Keratin)" },
+            { "value": "science", "label": "Science / Biotin" },
+            { "value": "sparkle", "label": "Sparkle / Shine" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Ingredient Name",
+          "default": "Argan Oil"
+        },
+        {
+          "type": "text",
+          "id": "latin_name",
+          "label": "Latin Botanical Name",
+          "default": "Argania spinosa kernel oil"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Liquid gold from Morocco. Deeply conditions and adds mirror-like shine while the color develops."
+        },
+        {
+          "type": "text",
+          "id": "benefit",
+          "label": "Key Benefit Tag",
+          "default": "Frizz Control & Shine"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredients (Dark)",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "icon": "leaf",
+            "title": "Argan Oil",
+            "latin_name": "Argania spinosa kernel oil",
+            "description": "Liquid gold from Morocco. Deeply conditions and adds mirror-like shine while the color develops.",
+            "benefit": "Frizz Control & Shine"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "icon": "science",
+            "title": "Biotin",
+            "latin_name": "Vitamin B7",
+            "description": "Strengthens the hair shaft from within. Reduces breakage and promotes thickness with each wash.",
+            "benefit": "Strength & Thickness"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shield",
+            "title": "Keratin",
+            "latin_name": "Hydrolyzed Keratin Protein",
+            "description": "Repairs and smooths the hair cuticle, leaving each strand sealed, silky, and frizz-resistant.",
+            "benefit": "Repair & Smoothing"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "icon": "leaf",
+            "title": "Olive Extract",
+            "latin_name": "Olea europaea fruit extract",
+            "description": "Rich in antioxidants and Vitamin E. Nourishes the scalp and protects hair from oxidative stress.",
+            "benefit": "Scalp Nourishment"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

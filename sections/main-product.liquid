@@ -1,0 +1,446 @@
+{% comment %}
+  Maykey Hair Care — Main Product Detail Page (PDP) Section
+  Features:
+    - Left: Sticky Product Gallery with Shade Swatch Indicator & Thumbnail Strip
+    - Right: Buy Box with Shade Pills, Sibling Product Format Switcher, Dynamic Pricing, COD Guarantees, and Collapsible Metafield Accordions
+{% endcomment %}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section class="section pdp-section" id="MainProduct-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    <!-- Breadcrumb -->
+    <nav class="pdp-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="pdp-breadcrumb-sep">/</span>
+      {%- if collection -%}
+        <a href="{{ collection.url }}">{{ collection.title }}</a>
+        <span class="pdp-breadcrumb-sep">/</span>
+      {%- endif -%}
+      <span class="pdp-breadcrumb-current">{{ product.title }}</span>
+    </nav>
+
+    <div class="pdp-layout">
+      <!-- LEFT: Product Gallery Pane -->
+      <div class="pdp-gallery-pane">
+        <div class="pdp-gallery-main">
+          <!-- Shade Indicator Badge Overlay -->
+          <div class="pdp-shade-overlay-badge" id="galleryShadeBadge">
+            <div
+              class="pdp-shade-overlay-swatch"
+              id="galleryShadeSwatch"
+              style="background-color: var(--shade-dark-brown);"
+            ></div>
+            <span id="galleryShadeName">{{ current_variant.title }}</span>
+          </div>
+
+          {%- if product.featured_media -%}
+            <img
+              src="{{ current_variant.image | default: product.featured_media | image_url: width: 1000 }}"
+              alt="{{ product.title | escape }}"
+              class="pdp-gallery-main-img"
+              id="pdpMainImage"
+              width="500"
+              height="600"
+            >
+          {%- else -%}
+            <div class="product-card-placeholder" style="width: 80%; height: 80%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;">
+              {% render 'icon-bottle', size: 64 %}
+              <span style="font-size: 13px; color: var(--subtle);">Product Media Image</span>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <!-- Thumbnail Strip -->
+        {%- if product.media.size > 1 -%}
+          <div class="pdp-gallery-thumbs" role="list" aria-label="Product thumbnails">
+            {%- for media in product.media -%}
+              <div
+                class="pdp-gallery-thumb {% if forloop.first %}active{% endif %}"
+                role="listitem"
+                data-media-id="{{ media.id }}"
+                data-image-url="{{ media | image_url: width: 1000 }}"
+              >
+                <img
+                  src="{{ media | image_url: width: 160, height: 160 }}"
+                  alt="{{ media.alt | default: product.title }}"
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                >
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- RIGHT: Sticky Buy Box -->
+      <div class="pdp-buy-box">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when '@app' -%}
+              {% render block %}
+
+            {%- when 'title' -%}
+              <div {{ block.shopify_attributes }}>
+                {%- if block.settings.eyebrow != blank -%}
+                  <div class="section-eyebrow">{{ block.settings.eyebrow }}</div>
+                {%- endif -%}
+                <h1 class="pdp-title">{{ product.title }}</h1>
+                {%- if block.settings.subtitle != blank -%}
+                  <p class="pdp-subtitle">{{ block.settings.subtitle }}</p>
+                {%- endif -%}
+              </div>
+
+            {%- when 'badges' -%}
+              <div class="pdp-badges-row" {{ block.shopify_attributes }}>
+                <div class="pdp-badge-pill gold">
+                  {% render 'icon-clock', size: 12 %}
+                  <span>15 Min Action</span>
+                </div>
+                <div class="pdp-badge-pill">
+                  {% render 'icon-shield', size: 12 %}
+                  <span>0% Ammonia</span>
+                </div>
+                <div class="pdp-badge-pill">
+                  {% render 'icon-leaf', size: 12 %}
+                  <span>Argan Oil</span>
+                </div>
+                <div class="pdp-badge-pill">
+                  {% render 'icon-sparkle', size: 12 %}
+                  <span>Biotin + Keratin</span>
+                </div>
+              </div>
+
+            {%- when 'variant_picker' -%}
+              <div class="pdp-variant-picker-block" {{ block.shopify_attributes }}>
+                {%- unless product.has_only_default_variant -%}
+                  <div class="pdp-selector-label">
+                    <span>{{ 'products.product.shade' | default: 'Shade' }}</span>
+                    <span class="selected-val" id="selectedShadeText">{{ current_variant.title }}</span>
+                  </div>
+
+                  <div class="pdp-shade-pills" role="radiogroup" aria-label="Select shade">
+                    {%- for variant in product.variants -%}
+                      {%- assign var_handle = variant.title | handle -%}
+                      <button
+                        type="button"
+                        class="pdp-shade-pill-btn {% if variant.id == current_variant.id %}active{% endif %}"
+                        data-variant-id="{{ variant.id }}"
+                        data-variant-title="{{ variant.title }}"
+                        data-variant-price="{{ variant.price | money }}"
+                        data-variant-compare="{{ variant.compare_at_price | money }}"
+                        data-variant-available="{{ variant.available }}"
+                        data-variant-image="{% if variant.image %}{{ variant.image | image_url: width: 1000 }}{% endif %}"
+                        role="radio"
+                        aria-checked="{% if variant.id == current_variant.id %}true{% else %}false{% endif %}"
+                      >
+                        <span
+                          class="pdp-shade-dot"
+                          style="background-color: {%- if var_handle contains 'black' -%}var(--shade-natural-black){%- elsif var_handle contains 'dark' -%}var(--shade-dark-brown){%- else -%}var(--shade-light-brown){%- endif -%};"
+                        ></span>
+                        <span>{{ variant.title }}</span>
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                {%- endunless -%}
+
+                <!-- Sibling Format Switcher (Bottle vs Sachet Link) -->
+                {%- if block.settings.show_format_switcher -%}
+                  <div class="pdp-selector-label" style="margin-top: 16px;">
+                    <span>{{ 'products.product.format_size' | default: 'Format / Size' }}</span>
+                  </div>
+                  <div class="pdp-format-pills">
+                    <a
+                      href="{{ block.settings.sachet_product_url | default: '/products/maykey-hair-darkening-shampoo-30ml' }}"
+                      class="pdp-format-pill-btn {% if product.handle contains 'sachet' or product.handle contains '30' %}active{% endif %}"
+                    >
+                      <span class="fmt-size">30ml</span>
+                      <span class="fmt-desc">Sachet Pack · Travel</span>
+                    </a>
+
+                    <a
+                      href="{{ block.settings.bottle_product_url | default: '/products/maykey-hair-darkening-shampoo-250ml' }}"
+                      class="pdp-format-pill-btn {% if product.handle contains 'bottle' or product.handle contains '250' %}active{% endif %}"
+                    >
+                      <span class="fmt-size">250ml</span>
+                      <span class="fmt-desc">Pump Bottle · Best Value</span>
+                    </a>
+                  </div>
+                {%- endif -%}
+              </div>
+
+            {%- when 'price' -%}
+              <div class="pdp-pricing-block" {{ block.shopify_attributes }}>
+                <div class="pdp-price-row">
+                  <span class="pdp-price" id="pdpCurrentPrice">{{ current_variant.price | money }}</span>
+                  {%- if current_variant.compare_at_price > current_variant.price -%}
+                    <span class="pdp-compare-price" id="pdpComparePrice">{{ current_variant.compare_at_price | money }}</span>
+                    {%- assign pdp_save = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}
+                    <span class="pdp-save-badge" id="pdpSaveBadge">Save {{ pdp_save }}%</span>
+                  {%- endif -%}
+                </div>
+
+                <div class="pdp-shipping-note">
+                  {% render 'icon-truck', size: 14 %}
+                  <span>Free delivery on orders above Rs. 2,500</span>
+                </div>
+
+                <div class="pdp-cod-note">
+                  {% render 'icon-check', size: 14 %}
+                  <span>Cash on Delivery available · Delivery in 2–5 business days</span>
+                </div>
+              </div>
+
+            {%- when 'buy_buttons' -%}
+              <div class="pdp-buy-buttons-block" {{ block.shopify_attributes }}>
+                <form action="{{ routes.cart_add_url }}" method="post" id="pdpAddToCartForm">
+                  <input type="hidden" name="id" id="pdpSelectedVariantId" value="{{ current_variant.id }}">
+
+                  <div class="pdp-cta-stack">
+                    <button
+                      type="submit"
+                      name="add"
+                      class="btn-pdp-cart"
+                      id="pdpAddToCartBtn"
+                      {% unless current_variant.available %}disabled{% endunless %}
+                    >
+                      {% render 'icon-cart', size: 18 %}
+                      <span id="pdpAddToCartText">
+                        {%- if current_variant.available -%}
+                          {{ 'products.product.add_to_cart' | default: 'Add to Cart' }}
+                        {%- else -%}
+                          {{ 'products.product.sold_out' | default: 'Sold Out' }}
+                        {%- endif -%}
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn-pdp-buy-now"
+                      id="pdpBuyNowCodBtn"
+                      onclick="document.getElementById('pdpAddToCartForm').dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));"
+                    >
+                      <span>{{ 'products.product.buy_now_cod' | default: 'Buy Now — Cash on Delivery' }}</span>
+                      {% render 'icon-chevron', size: 14 %}
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+            {%- when 'trust_row' -%}
+              <div class="pdp-trust-grid" {{ block.shopify_attributes }}>
+                <div class="pdp-trust-item">
+                  {% render 'icon-package', size: 18 %}
+                  <div class="pdp-trust-label">Cash on Delivery</div>
+                  <div class="pdp-trust-subtext">Pay on arrival</div>
+                </div>
+                <div class="pdp-trust-item">
+                  {% render 'icon-truck', size: 18 %}
+                  <div class="pdp-trust-label">Free Shipping</div>
+                  <div class="pdp-trust-subtext">Orders Rs. 2,500+</div>
+                </div>
+                <div class="pdp-trust-item">
+                  {% render 'icon-chat', size: 18 %}
+                  <div class="pdp-trust-label">WhatsApp Help</div>
+                  <div class="pdp-trust-subtext">Mon–Sat, 9am–9pm</div>
+                </div>
+              </div>
+
+            {%- when 'collapsible_tab' -%}
+              <div class="pdp-metafield-drawers" {{ block.shopify_attributes }}>
+                <div class="pdp-drawer-item {% if block.settings.open_by_default %}open{% endif %}">
+                  <button
+                    type="button"
+                    class="pdp-drawer-trigger"
+                    aria-expanded="{% if block.settings.open_by_default %}true{% else %}false{% endif %}"
+                  >
+                    <span>{{ block.settings.heading }}</span>
+                    <div class="pdp-drawer-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 2h8M6 2v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </div>
+                  </button>
+                  <div class="pdp-drawer-content">
+                    <div class="pdp-drawer-inner">
+                      {{ block.settings.content }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // PDP Variant Switcher and Image Synchronization
+  document.addEventListener('DOMContentLoaded', () => {
+    const shadeBtns = document.querySelectorAll('.pdp-shade-pill-btn');
+    const hiddenVariantInput = document.getElementById('pdpSelectedVariantId');
+    const selectedShadeText = document.getElementById('selectedShadeText');
+    const galleryShadeName = document.getElementById('galleryShadeName');
+    const galleryShadeSwatch = document.getElementById('galleryShadeSwatch');
+    const mainImg = document.getElementById('pdpMainImage');
+    const priceEl = document.getElementById('pdpCurrentPrice');
+    const comparePriceEl = document.getElementById('pdpComparePrice');
+    const addBtn = document.getElementById('pdpAddToCartBtn');
+    const addBtnText = document.getElementById('pdpAddToCartText');
+
+    shadeBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        shadeBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-checked', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-checked', 'true');
+
+        const varId = btn.dataset.variantId;
+        const varTitle = btn.dataset.variantTitle;
+        const varPrice = btn.dataset.variantPrice;
+        const varCompare = btn.dataset.variantCompare;
+        const varAvailable = btn.dataset.variantAvailable === 'true';
+        const varImg = btn.dataset.variantImage;
+
+        if (hiddenVariantInput) hiddenVariantInput.value = varId;
+        if (selectedShadeText) selectedShadeText.textContent = varTitle;
+        if (galleryShadeName) galleryShadeName.textContent = varTitle;
+        if (priceEl) priceEl.textContent = varPrice;
+        if (comparePriceEl && varCompare) comparePriceEl.textContent = varCompare;
+
+        // Update swatch color overlay
+        if (galleryShadeSwatch) {
+          const dot = btn.querySelector('.pdp-shade-dot');
+          if (dot) galleryShadeSwatch.style.backgroundColor = dot.style.backgroundColor;
+        }
+
+        // Update main image if variant has its own image
+        if (mainImg && varImg) mainImg.src = varImg;
+
+        // Update Add to Cart button state
+        if (addBtn && addBtnText) {
+          if (varAvailable) {
+            addBtn.disabled = false;
+            addBtnText.textContent = 'Add to Cart';
+          } else {
+            addBtn.disabled = true;
+            addBtnText.textContent = 'Sold Out';
+          }
+        }
+      });
+    });
+
+    // Gallery Thumbnail Switching
+    const thumbs = document.querySelectorAll('.pdp-gallery-thumb');
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        thumbs.forEach((t) => t.classList.remove('active'));
+        thumb.classList.add('active');
+        const imgUrl = thumb.dataset.imageUrl;
+        if (mainImg && imgUrl) mainImg.src = imgUrl;
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Main Product",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "Title & Subtitle",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Hair Darkening Shampoo"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "For Men & Women · Ammonia-Free · 250ml Pump Bottle"
+        }
+      ]
+    },
+    {
+      "type": "badges",
+      "name": "Highlight Badges",
+      "limit": 1
+    },
+    {
+      "type": "variant_picker",
+      "name": "Shade & Format Switcher",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_format_switcher",
+          "label": "Show Sibling Format Switcher (Bottle vs Sachet)",
+          "default": true
+        },
+        {
+          "type": "url",
+          "id": "bottle_product_url",
+          "label": "250ml Bottle Product URL"
+        },
+        {
+          "type": "url",
+          "id": "sachet_product_url",
+          "label": "30ml Sachet Product URL"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price & Delivery Note",
+      "limit": 1
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Add to Cart & COD Buttons",
+      "limit": 1
+    },
+    {
+      "type": "trust_row",
+      "name": "COD Trust Triad",
+      "limit": 1
+    },
+    {
+      "type": "collapsible_tab",
+      "name": "Collapsible Accordion Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Tab Heading",
+          "default": "How to Use & Development Time"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Tab Content (HTML supported)",
+          "default": "<h5>Step-by-Step Application</h5><ul><li>Start with <strong>damp, pre-washed hair</strong>.</li><li>Apply generously from roots to tips.</li><li>Leave on for <strong>15 minutes</strong>.</li><li>Rinse thoroughly with lukewarm water.</li></ul>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by Default",
+          "default": false
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

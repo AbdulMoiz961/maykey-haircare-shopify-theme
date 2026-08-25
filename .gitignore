@@ -1,0 +1,12 @@
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Shopify CLI temp files
+.shopify/
+.env
+
+# Editor settings
+.vscode/
+.idea/

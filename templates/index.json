@@ -1,0 +1,364 @@
+{
+  "sections": {
+    "hero_banner": {
+      "type": "hero-banner",
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "text": "0% Ammonia",
+            "is_olive": false
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "text": "Fast 15 Mins",
+            "is_olive": false
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "text": "Argan Oil Enriched",
+            "is_olive": true
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "text": "Keratin Repair",
+            "is_olive": true
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ],
+      "settings": {
+        "eyebrow": "Hair Darkening Shampoo",
+        "headline": "Gray Coverage<br/>in <em>15 Minutes.</em><br/>Naturally.",
+        "subline": "Ammonia-free formula enriched with Argan Oil, Biotin & Keratin. Shampoo in, gray out — without compromising hair health.",
+        "btn_1_text": "Shop 250ml Bottle",
+        "btn_1_link": "/products/maykey-hair-darkening-shampoo-250ml",
+        "btn_2_text": "Try Sachet Pack",
+        "btn_2_link": "/products/maykey-hair-darkening-shampoo-30ml",
+        "timer_text": "Works in just <strong>15 minutes</strong> — from application to rinse",
+        "float_1_text": "Cash on Delivery",
+        "float_2_text": "0% Ammonia"
+      }
+    },
+    "trust_bar": {
+      "type": "trust-bar",
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "package",
+            "title": "Cash on Delivery",
+            "subtext": "Available Nationwide"
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Delivery",
+            "subtext": "Orders above Rs. 2,500"
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "clock",
+            "title": "15-Minute Results",
+            "subtext": "Fast color treatment"
+          }
+        },
+        "trust_4": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "shield",
+            "title": "0% Ammonia",
+            "subtext": "Safe for all hair types"
+          }
+        },
+        "trust_5": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "chat",
+            "title": "WhatsApp Support",
+            "subtext": "Mon–Sat, 9am–9pm"
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4",
+        "trust_5"
+      ],
+      "settings": {}
+    },
+    "product_comparison": {
+      "type": "product-comparison",
+      "blocks": {
+        "card_sachet": {
+          "type": "card",
+          "settings": {
+            "is_featured": false,
+            "badge_text": "",
+            "title": "30ml Sachet Pack",
+            "subhead": "Travel & Quick Touch-ups · Single-Use",
+            "feat_1": "Perfect for travel & on-the-go",
+            "feat_2": "Try before committing to full bottle",
+            "feat_3": "Single-use convenience",
+            "feat_4": "Same premium botanical formula",
+            "btn_text": "Shop Sachet Pack",
+            "btn_link": "/products/maykey-hair-darkening-shampoo-30ml"
+          }
+        },
+        "card_bottle": {
+          "type": "card",
+          "settings": {
+            "is_featured": true,
+            "badge_text": "★ Best Value",
+            "title": "250ml Pump Bottle",
+            "subhead": "Multi-Application Value · For Men & Women",
+            "feat_1": "<strong>8+ applications</strong> per bottle",
+            "feat_2": "Premium pump dispenser — no mess",
+            "feat_3": "3 shades: Natural Black, Dark Brown, Light Brown",
+            "feat_4": "Suitable for Men & Women",
+            "btn_text": "Shop 250ml Bottle",
+            "btn_link": "/products/maykey-hair-darkening-shampoo-250ml"
+          }
+        }
+      },
+      "block_order": [
+        "card_sachet",
+        "card_bottle"
+      ],
+      "settings": {
+        "eyebrow": "Two Formats. One Solution.",
+        "headline": "Find the <em>Right Format</em><br/>for Your Routine",
+        "subline": "Whether you're traveling or coloring weekly — we have the perfect size."
+      }
+    },
+    "shade_selector": {
+      "type": "shade-selector",
+      "blocks": {
+        "shade_black": {
+          "type": "shade",
+          "settings": {
+            "code": "Shade 001",
+            "title": "Natural Black",
+            "gradient": "linear-gradient(135deg, #1C1008 0%, #0D0805 50%, #2A1810 100%)",
+            "description": "Deep, rich black with warm undertones. Provides 100% gray coverage with a natural-looking finish.",
+            "tag_1": "100% Gray Coverage",
+            "tag_2": "Warm Undertone",
+            "btn_text": "Select Shade →",
+            "product_link": "/products/maykey-hair-darkening-shampoo-250ml?variant=natural-black"
+          }
+        },
+        "shade_dark_brown": {
+          "type": "shade",
+          "settings": {
+            "code": "Shade 002",
+            "title": "Dark Brown",
+            "gradient": "linear-gradient(135deg, #3B1F0A 0%, #2A1508 50%, #4A2810 100%)",
+            "description": "Rich espresso brown with golden undertones. Adds depth and warmth while covering gray seamlessly.",
+            "tag_1": "Golden Undertone",
+            "tag_2": "Deep Coverage",
+            "btn_text": "Select Shade →",
+            "product_link": "/products/maykey-hair-darkening-shampoo-250ml?variant=dark-brown"
+          }
+        },
+        "shade_light_brown": {
+          "type": "shade",
+          "settings": {
+            "code": "Shade 003",
+            "title": "Light Brown",
+            "gradient": "linear-gradient(135deg, #7B4A1E 0%, #6B3D18 50%, #8F5828 100%)",
+            "description": "Soft caramel brown with warm, sun-kissed tones. Ideal for lighter coverage and a natural, radiant look.",
+            "tag_1": "Caramel Tones",
+            "tag_2": "Lighter Coverage",
+            "btn_text": "Select Shade →",
+            "product_link": "/products/maykey-hair-darkening-shampoo-250ml?variant=light-brown"
+          }
+        }
+      },
+      "block_order": [
+        "shade_black",
+        "shade_dark_brown",
+        "shade_light_brown"
+      ],
+      "settings": {
+        "eyebrow": "Choose Your Shade",
+        "headline": "Your Color,<br/><em>Your Identity</em>",
+        "subline": "All shades are ammonia-free and deliver rich, lasting coverage in just 15 minutes."
+      }
+    },
+    "ingredients": {
+      "type": "ingredients",
+      "blocks": {
+        "ing_argan": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "leaf",
+            "title": "Argan Oil",
+            "latin_name": "Argania spinosa kernel oil",
+            "description": "Liquid gold from Morocco. Deeply conditions and adds mirror-like shine while the color develops.",
+            "benefit": "Frizz Control & Shine"
+          }
+        },
+        "ing_biotin": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "science",
+            "title": "Biotin",
+            "latin_name": "Vitamin B7",
+            "description": "Strengthens the hair shaft from within. Reduces breakage and promotes thickness with each wash.",
+            "benefit": "Strength & Thickness"
+          }
+        },
+        "ing_keratin": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shield",
+            "title": "Keratin",
+            "latin_name": "Hydrolyzed Keratin Protein",
+            "description": "Repairs and smooths the hair cuticle, leaving each strand sealed, silky, and frizz-resistant.",
+            "benefit": "Repair & Smoothing"
+          }
+        },
+        "ing_olive": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "leaf",
+            "title": "Olive Extract",
+            "latin_name": "Olea europaea fruit extract",
+            "description": "Rich in antioxidants and Vitamin E. Nourishes the scalp and protects hair from oxidative stress.",
+            "benefit": "Scalp Nourishment"
+          }
+        }
+      },
+      "block_order": [
+        "ing_argan",
+        "ing_biotin",
+        "ing_keratin",
+        "ing_olive"
+      ],
+      "settings": {
+        "eyebrow": "The Formulation",
+        "headline": "Science-Backed.<br/><em>Botanically Enriched.</em>",
+        "subline": "Every bottle carries a carefully curated blend of active ingredients that color and care simultaneously."
+      }
+    },
+    "how_to_use": {
+      "type": "how-to-use",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "icon": "bottle",
+            "title": "Apply",
+            "description": "Apply generously to wet, pre-washed hair. Massage from roots to tips until fully coated, just like regular shampoo.",
+            "time_badge": ""
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "icon": "clock",
+            "title": "Wait",
+            "description": "Leave on for 15 minutes while the botanical actives work to deliver rich color and deep conditioning.",
+            "time_badge": "15 Minutes"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Rinse",
+            "description": "Rinse thoroughly with water. Reveal rich, lasting color with a brilliant shine — no conditioner needed.",
+            "time_badge": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "eyebrow": "How To Use",
+        "headline": "As Simple As<br/><em>Shampooing.</em>",
+        "subline": "Three steps to rich, lasting color — no salon visit, no developer, no mess."
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How well does it cover gray hair?",
+            "answer": "Maykey Hair Darkening Shampoo provides excellent gray coverage — Natural Black and Dark Brown offer up to 100% coverage, while Light Brown provides natural-looking blending for lighter grays. Results may vary based on hair porosity and percentage of gray. For best results, use consistently every 1–2 weeks."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it safe for sensitive scalps?",
+            "answer": "Our formula is 100% ammonia-free, making it significantly gentler than traditional permanent dyes. However, we strongly recommend performing a 24–48 hour patch test before first use. Apply a small amount behind your ear or on your inner elbow."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does the color last?",
+            "answer": "Color typically lasts 2–4 weeks depending on your hair's porosity, washing frequency, and sun exposure. Because it's a semi-permanent formula, the color fades naturally without harsh regrowth lines."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer Cash on Delivery (COD)?",
+            "answer": "Yes! Cash on Delivery (COD) is available across Pakistan — including Karachi, Lahore, Islamabad, Rawalpindi, Faisalabad, Peshawar, and all other cities. Orders above Rs. 2,500 qualify for free shipping."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can men use this product too?",
+            "answer": "Absolutely. Maykey Hair Darkening Shampoo is formulated for both men and women. It is especially popular among men for quick, hassle-free temple and gray coverage during their regular shower routine."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "eyebrow": "Got Questions?",
+        "headline": "Frequently Asked<br/><em>Questions</em>"
+      }
+    }
+  },
+  "order": [
+    "hero_banner",
+    "trust_bar",
+    "product_comparison",
+    "shade_selector",
+    "ingredients",
+    "how_to_use",
+    "faq_accordion"
+  ]
+}

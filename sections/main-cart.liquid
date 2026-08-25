@@ -1,0 +1,61 @@
+{% comment %}
+  Maykey Hair Care — Fallback Main Cart Page Section
+{% endcomment %}
+<section class="section cart-page-section">
+  <div class="container" style="max-width: 800px;">
+    <h1 class="section-title" style="margin-bottom: 32px;">{{ 'cart.general.title' | default: 'Your Shopping Cart' }}</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" id="cartPageForm">
+        <div class="cart-items-list" style="margin-bottom: 32px;">
+          {%- for item in cart.items -%}
+            <div class="cart-item" style="padding: 16px 0;">
+              <div class="cart-item-img-wrap" style="width: 80px; height: 80px;">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" class="cart-item-img">
+                {%- else -%}
+                  <div class="cart-item-placeholder">{% render 'icon-bottle', size: 24 %}</div>
+                {%- endif -%}
+              </div>
+
+              <div class="cart-item-info">
+                <a href="{{ item.url }}" class="cart-item-name">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <div class="cart-item-variant">{{ item.variant.title }}</div>
+                {%- endunless -%}
+                <div class="cart-item-price" style="margin: 8px 0;">{{ item.final_line_price | money }}</div>
+                <div style="font-size: 13px; color: var(--muted);">Quantity: {{ item.quantity }}</div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div style="border-top: 1px solid var(--border-light); padding-top: 24px;">
+          <div class="cart-subtotal-row" style="margin-bottom: 16px;">
+            <span>{{ 'cart.general.subtotal' | default: 'Subtotal' }}:</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+
+          <button type="submit" name="checkout" class="btn-primary" style="width: 100%; justify-content: center;">
+            <span>{{ 'cart.general.checkout' | default: 'Proceed to Checkout' }}</span>
+            {% render 'icon-chevron', size: 14 %}
+          </button>
+        </div>
+      </form>
+    {%- else -%}
+      <div style="text-align: center; padding: 60px 0;">
+        <p style="font-size: 18px; color: var(--muted); margin-bottom: 24px;">{{ 'cart.general.empty' | default: 'Your cart is empty.' }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn-primary">
+          <span>{{ 'cart.general.continue_shopping' | default: 'Shop Shades' }}</span>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Cart",
+  "settings": []
+}
+{% endschema %}

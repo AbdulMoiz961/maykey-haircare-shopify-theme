@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Theme info",
+    "theme_name": "Maykey Hair Care",
+    "theme_version": "1.0.0",
+    "theme_author": "Maykey Design Team",
+    "theme_documentation_url": "https://maykey.pk",
+    "theme_support_url": "https://maykey.pk"
+  },
+  {
+    "name": "Brand Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Canvas Background (Alabaster)",
+        "default": "#F9F8F6"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_alt",
+        "label": "Secondary Background (Linen)",
+        "default": "#F3EFEA"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_deep",
+        "label": "Deep Background (Linen Dark)",
+        "default": "#EAE4DB"
+      },
+      {
+        "type": "color",
+        "id": "color_text_primary",
+        "label": "Primary Text (Soft Onyx)",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "label": "Secondary Text (Charcoal)",
+        "default": "#2C2C2C"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Muted Text",
+        "default": "#6B6B6B"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_gold",
+        "label": "Accent Gold",
+        "default": "#C5A059"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_olive",
+        "label": "Botanical Olive Green",
+        "default": "#4A5D3E"
+      }
+    ]
+  },
+  {
+    "name": "Pakistan / COD Settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold (in Cents/Paisas, e.g. 250000 = Rs. 2,500)",
+        "default": "250000"
+      },
+      {
+        "type": "text",
+        "id": "cod_notice_text",
+        "label": "COD Notice Text",
+        "default": "Cash on Delivery Available Across Pakistan"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp Support Number (without +, e.g. 923001234567)",
+        "default": "923000000000"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_default_message",
+        "label": "Default WhatsApp Message",
+        "default": "Hello Maykey Hair Care! I would like to order or ask a question about your products."
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram Link"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook Link"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok_link",
+        "label": "TikTok Link"
+      }
+    ]
+  }
+]

@@ -1,0 +1,96 @@
+{
+  "sections": {
+    "main_product": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "eyebrow": "Hair Darkening Shampoo",
+            "subtitle": "For Men & Women · Ammonia-Free · Fast 15-Minute Color & Care"
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "show_format_switcher": true,
+            "bottle_product_url": "/products/maykey-hair-darkening-shampoo-250ml",
+            "sachet_product_url": "/products/maykey-hair-darkening-shampoo-30ml"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "trust_row": {
+          "type": "trust_row",
+          "settings": {}
+        },
+        "tab_how_to_use": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How to Use & Development Time",
+            "content": "<h5>Step-by-Step Application</h5><ul><li>Start with <strong>damp, pre-washed hair</strong>. The hair should be clean and slightly towel-dried.</li><li>Apply the shampoo <strong>generously</strong> from roots to tips, massaging it in the same way as regular shampoo.</li><li>Ensure complete coverage, paying extra attention to <strong>gray areas at the temples and crown</strong>.</li><li>Leave on for <strong>15 minutes</strong> without rinsing. Use a timer for consistent results.</li><li>Rinse thoroughly with <strong>lukewarm water</strong> until water runs clear.</li><li>No conditioner needed — the Argan Oil formula conditions as it colors.</li></ul><h5>Development Time</h5><p>⏱ <strong>15 minutes</strong> — Do not exceed 20 minutes. Rinse promptly for optimal color and hair health.</p>",
+            "open_by_default": true
+          }
+        },
+        "tab_ingredients": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ingredients & Botanical Actives",
+            "content": "<h5>Key Actives</h5><ul><li><strong>Argan Oil</strong> (Argania spinosa kernel oil) — Deep conditioning, frizz control, mirror shine</li><li><strong>Biotin</strong> (Vitamin B7) — Strengthens hair shaft, reduces breakage, promotes thickness</li><li><strong>Hydrolyzed Keratin</strong> — Repairs hair cuticle, seals split ends, adds silkiness</li><li><strong>Olive Extract</strong> (Olea europaea fruit extract) — Antioxidant-rich scalp nourishment</li></ul><h5>Full Ingredient List</h5><p style=\"font-size:13px; line-height:1.7; color: var(--muted);\">Aqua, Cetearyl Alcohol, Argania Spinosa Kernel Oil, Hydrolyzed Keratin, Biotin, Olea Europaea Fruit Extract, p-Phenylenediamine, Resorcinol, Sodium Sulfite, Hydrogen Peroxide, Citric Acid, Fragrance.</p><p style=\"margin-top:10px; font-size:12px; color: var(--subtle);\">* Free from Ammonia, Parabens, and Sulfates</p>",
+            "open_by_default": false
+          }
+        },
+        "tab_safety": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Patch Test & Safety Precautions",
+            "content": "<h5>⚠️ Mandatory Patch Test (24–48 Hours Before Use)</h5><ul><li>Apply a small coin-sized amount to the <strong>inner elbow or behind the ear</strong>.</li><li>Leave on for <strong>20 minutes</strong>, then rinse off and wait 24–48 hours.</li><li>If you experience redness, itching, swelling, or burning — <strong>do not use</strong> this product.</li></ul><h5>Important Warnings</h5><ul><li>Not suitable for individuals with a known allergy to <strong>p-Phenylenediamine (PPD)</strong>.</li><li>Keep out of eyes. If contact occurs, rinse immediately with water.</li><li>Do not use if scalp is irritated, cut, or damaged.</li><li>Keep away from children under 16.</li><li>Pregnant or nursing women should consult a physician before use.</li></ul>",
+            "open_by_default": false
+          }
+        },
+        "tab_delivery": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Nationwide Delivery & COD Details",
+            "content": "<h5>Cash on Delivery (COD)</h5><ul><li>COD is available on all orders across Pakistan.</li><li>You pay the delivery rider in cash on arrival — no upfront payment required.</li></ul><h5>Delivery Timelines</h5><ul><li><strong>Major Cities</strong> (Karachi, Lahore, Islamabad, Rawalpindi): 2–3 business days</li><li><strong>Other Cities</strong>: 3–5 business days</li><li>Orders are dispatched within 1 business day of confirmation.</li></ul><h5>Free Shipping</h5><p>Orders above <strong>Rs. 2,500</strong> qualify for free standard delivery. Orders below Rs. 2,500 incur a standard flat delivery fee.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "badges",
+        "variant_picker",
+        "price",
+        "buy_buttons",
+        "trust_row",
+        "tab_how_to_use",
+        "tab_ingredients",
+        "tab_safety",
+        "tab_delivery"
+      ],
+      "settings": {}
+    },
+    "related_products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You May Also Like",
+        "products_to_show": 3
+      }
+    }
+  },
+  "order": [
+    "main_product",
+    "related_products"
+  ]
+}

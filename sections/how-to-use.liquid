@@ -1,0 +1,144 @@
+{% comment %}
+  Maykey Hair Care — 3-Step Application Routine Section
+{% endcomment %}
+<section class="section steps-section" id="howToUseSection">
+  <div class="container">
+    <div style="text-align: center;">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="section-eyebrow center">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+
+      <h2 class="section-title">{{ section.settings.headline }}</h2>
+
+      {%- if section.settings.subline != blank -%}
+        <p class="section-subtitle" style="margin: 16px auto 0; text-align: center;">
+          {{ section.settings.subline }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <div class="steps-grid">
+      {%- for block in section.blocks -%}
+        <div class="step-card" {{ block.shopify_attributes }}>
+          <div class="step-number">{{ forloop.index }}</div>
+
+          <div class="step-icon-box">
+            {%- case block.settings.icon -%}
+              {%- when 'bottle' -%}
+                {% render 'icon-bottle', size: 28 %}
+              {%- when 'clock' -%}
+                {% render 'icon-clock', size: 28 %}
+              {%- when 'sparkle' -%}
+                {% render 'icon-sparkle', size: 28 %}
+            {%- endcase -%}
+          </div>
+
+          <h3 class="step-title">{{ block.settings.title }}</h3>
+          <p class="step-desc">{{ block.settings.description }}</p>
+
+          {%- if block.settings.time_badge != blank -%}
+            <div class="step-time-badge">
+              {% render 'icon-clock', size: 12 %}
+              <span>{{ block.settings.time_badge }}</span>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How To Use (3 Steps)",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "How To Use"
+    },
+    {
+      "type": "html",
+      "id": "headline",
+      "label": "Headline",
+      "default": "As Simple As<br/><em>Shampooing.</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "subline",
+      "label": "Subline",
+      "default": "Three steps to rich, lasting color — no salon visit, no developer, no mess."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "bottle", "label": "Bottle (Apply)" },
+            { "value": "clock", "label": "Clock (Wait)" },
+            { "value": "sparkle", "label": "Sparkle (Rinse)" }
+          ],
+          "default": "bottle"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Apply"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Apply generously to wet, pre-washed hair. Massage from roots to tips until fully coated, just like regular shampoo."
+        },
+        {
+          "type": "text",
+          "id": "time_badge",
+          "label": "Optional Time Badge (e.g. 15 Minutes)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How To Use (3 Steps)",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "bottle",
+            "title": "Apply",
+            "description": "Apply generously to wet, pre-washed hair. Massage from roots to tips until fully coated, just like regular shampoo."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "clock",
+            "title": "Wait",
+            "description": "Leave on for 15 minutes while the botanical actives work to deliver rich color and deep conditioning.",
+            "time_badge": "15 Minutes"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Rinse",
+            "description": "Rinse thoroughly with water. Reveal rich, lasting color with a brilliant shine — no conditioner needed."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
