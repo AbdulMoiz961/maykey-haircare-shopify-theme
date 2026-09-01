@@ -15,6 +15,8 @@
           alt="{{ product.featured_media.alt | default: product.title | escape }}"
           class="product-card-img"
           loading="lazy"
+          width="400"
+          height="400"
         >
       {%- else -%}
         <div class="product-card-placeholder">
