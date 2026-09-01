@@ -1,0 +1,81 @@
+{% comment %}
+  Maykey Hair Care — Customer Account Dashboard
+{% endcomment %}
+<section class="section customer-account-section" style="padding: 60px 0;">
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-light); padding-bottom: 20px; margin-bottom: 36px;">
+      <div>
+        <h1 class="section-title" style="margin-bottom: 4px;">My Account</h1>
+        <p style="color: var(--muted); font-size: 15px;">Welcome back, {{ customer.first_name | default: 'Valued Customer' }}!</p>
+      </div>
+      <a href="{{ routes.account_logout_url }}" style="font-size: 14px; color: var(--accent-gold); font-weight: 500; text-decoration: underline;">Log out</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 48px;">
+      <!-- Order History -->
+      <div>
+        <h2 style="font-family: var(--font-serif); font-size: 22px; margin-bottom: 20px;">Order History</h2>
+        {%- paginate customer.orders by 10 -%}
+          {%- if customer.orders.size > 0 -%}
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-light); color: var(--muted);">
+                  <th style="padding: 12px 8px;">Order</th>
+                  <th style="padding: 12px 8px;">Date</th>
+                  <th style="padding: 12px 8px;">Payment</th>
+                  <th style="padding: 12px 8px;">Fulfillment</th>
+                  <th style="padding: 12px 8px; text-align: right;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr style="border-bottom: 1px solid var(--border-light);">
+                    <td style="padding: 14px 8px;"><a href="{{ order.customer_url }}" style="font-weight: 600; color: var(--onyx); text-decoration: underline;">{{ order.name }}</a></td>
+                    <td style="padding: 14px 8px; color: var(--muted);">{{ order.created_at | time_tag: format: 'date' }}</td>
+                    <td style="padding: 14px 8px;">{{ order.financial_status_label }}</td>
+                    <td style="padding: 14px 8px;">{{ order.fulfillment_status_label }}</td>
+                    <td style="padding: 14px 8px; text-align: right; font-weight: 600;">{{ order.total_net_amount | money_with_currency }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+            {{ paginate | default_pagination }}
+          {%- else -%}
+            <div style="background: var(--linen); padding: 32px; border-radius: var(--radius-md); text-align: center;">
+              <p style="color: var(--muted); margin-bottom: 16px;">You haven't placed any orders yet.</p>
+              <a href="{{ routes.all_products_collection_url }}" class="btn-primary">
+                <span>Start Shopping</span>
+              </a>
+            </div>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+
+      <!-- Account Details & Address -->
+      <div>
+        <h2 style="font-family: var(--font-serif); font-size: 22px; margin-bottom: 20px;">Account Details</h2>
+        <div style="background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px;">
+          <p style="font-weight: 600; color: var(--onyx); margin-bottom: 8px;">{{ customer.name }}</p>
+          <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">{{ customer.email }}</p>
+          {%- if customer.default_address -%}
+            <div style="font-size: 14px; line-height: 1.5; color: var(--charcoal);">
+              {{ customer.default_address | format_address }}
+            </div>
+          {%- endif -%}
+          <div style="margin-top: 16px;">
+            <a href="{{ routes.account_addresses_url }}" style="font-size: 13px; color: var(--accent-gold); text-decoration: underline;">
+              View addresses ({{ customer.addresses_count }})
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Account",
+  "settings": []
+}
+{% endschema %}

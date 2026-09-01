@@ -64,6 +64,12 @@
     "name": "Pakistan / COD Settings",
     "settings": [
       {
+        "type": "checkbox",
+        "id": "show_cart_note",
+        "label": "Enable Order Notes (e.g. for delivery instructions)",
+        "default": true
+      },
+      {
         "type": "text",
         "id": "free_shipping_threshold",
         "label": "Free Shipping Threshold (in Cents/Paisas, e.g. 250000 = Rs. 2,500)",

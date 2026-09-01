@@ -11,12 +11,10 @@
     <a href="{{ product.url }}" class="product-card-link" aria-label="{{ product.title | escape }}">
       {%- if product.featured_media -%}
         <img
-          src="{{ product.featured_media | image_url: width: 600 }}"
+          src="{{ product.featured_media | image_url: width: 500 }}"
           alt="{{ product.featured_media.alt | default: product.title | escape }}"
           class="product-card-img"
           loading="lazy"
-          width="400"
-          height="400"
         >
       {%- else -%}
         <div class="product-card-placeholder">
@@ -52,16 +50,16 @@
     {%- if show_quick_add -%}
       {%- if product.variants.size > 1 -%}
         <a href="{{ product.url }}" class="btn-card-action">
-          {{ 'products.product.choose_shade' | default: 'Choose Shade' }}
+          Choose Shade
         </a>
       {%- else -%}
         <form action="{{ routes.cart_add_url }}" method="post" class="quick-add-form">
           <input type="hidden" name="id" value="{{ product.variants.first.id }}">
           <button type="submit" class="btn-card-action" {% unless product.available %}disabled{% endunless %}>
             {%- if product.available -%}
-              {{ 'products.product.add_to_cart' | default: 'Add to Cart' }}
+              Add to Cart
             {%- else -%}
-              {{ 'products.product.sold_out' | default: 'Sold Out' }}
+              Sold Out
             {%- endif -%}
           </button>
         </form>

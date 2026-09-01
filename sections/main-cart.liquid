@@ -3,7 +3,7 @@
 {% endcomment %}
 <section class="section cart-page-section">
   <div class="container" style="max-width: 800px;">
-    <h1 class="section-title" style="margin-bottom: 32px;">{{ 'cart.general.title' | default: 'Your Shopping Cart' }}</h1>
+    <h1 class="section-title" style="margin-bottom: 32px;">Your Shopping Cart</h1>
 
     {%- if cart.item_count > 0 -%}
       <form action="{{ routes.cart_url }}" method="post" id="cartPageForm">
@@ -39,21 +39,21 @@
 
         <div style="border-top: 1px solid var(--border-light); padding-top: 24px;">
           <div class="cart-subtotal-row" style="margin-bottom: 16px;">
-            <span>{{ 'cart.general.subtotal' | default: 'Subtotal' }}:</span>
+            <span>Subtotal:</span>
             <span>{{ cart.total_price | money }}</span>
           </div>
 
           <button type="submit" name="checkout" class="btn-primary" style="width: 100%; justify-content: center;">
-            <span>{{ 'cart.general.checkout' | default: 'Proceed to Checkout' }}</span>
+            <span>Proceed to Checkout</span>
             {% render 'icon-chevron', size: 14 %}
           </button>
         </div>
       </form>
     {%- else -%}
       <div style="text-align: center; padding: 60px 0;">
-        <p style="font-size: 18px; color: var(--muted); margin-bottom: 24px;">{{ 'cart.general.empty' | default: 'Your cart is empty.' }}</p>
+        <p style="font-size: 18px; color: var(--muted); margin-bottom: 24px;">Your cart is empty.</p>
         <a href="{{ routes.all_products_collection_url }}" class="btn-primary">
-          <span>{{ 'cart.general.continue_shopping' | default: 'Shop Shades' }}</span>
+          <span>Shop Shades</span>
         </a>
       </div>
     {%- endif -%}

@@ -115,7 +115,7 @@
               <div class="pdp-variant-picker-block" {{ block.shopify_attributes }}>
                 {%- unless product.has_only_default_variant -%}
                   <div class="pdp-selector-label">
-                    <span>{{ 'products.product.shade' | default: 'Shade' }}</span>
+                    <span>Shade</span>
                     <span class="selected-val" id="selectedShadeText">{{ current_variant.title }}</span>
                   </div>
 
@@ -147,7 +147,7 @@
                 <!-- Sibling Format Switcher (Bottle vs Sachet Link) -->
                 {%- if block.settings.show_format_switcher -%}
                   <div class="pdp-selector-label" style="margin-top: 16px;">
-                    <span>{{ 'products.product.format_size' | default: 'Format / Size' }}</span>
+                    <span>Format / Size</span>
                   </div>
                   <div class="pdp-format-pills">
                     <a
@@ -207,9 +207,9 @@
                       {% render 'icon-cart', size: 18 %}
                       <span id="pdpAddToCartText">
                         {%- if current_variant.available -%}
-                          {{ 'products.product.add_to_cart' | default: 'Add to Cart' }}
+                          Add to Cart
                         {%- else -%}
-                          {{ 'products.product.sold_out' | default: 'Sold Out' }}
+                          Sold Out
                         {%- endif -%}
                       </span>
                     </button>
@@ -220,7 +220,7 @@
                       id="pdpBuyNowCodBtn"
                       onclick="document.getElementById('pdpAddToCartForm').dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));"
                     >
-                      <span>{{ 'products.product.buy_now_cod' | default: 'Buy Now — Cash on Delivery' }}</span>
+                      <span>Buy Now — Cash on Delivery</span>
                       {% render 'icon-chevron', size: 14 %}
                     </button>
                   </div>

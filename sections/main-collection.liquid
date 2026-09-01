@@ -4,26 +4,34 @@
 <section class="section collection-section" id="collectionSection">
   <div class="container">
     <div class="collection-header-box">
-      <div class="section-eyebrow center">{{ 'Our Products' }}</div>
-      <h1 class="section-title">{{ collection.title }}</h1>
-      {%- if collection.description != blank -%}
+      <div class="section-eyebrow center">{{ section.settings.eyebrow | escape }}</div>
+      <h1 class="section-title">
+        {%- if section.settings.override_title != blank -%}
+          {{ section.settings.override_title }}
+        {%- else -%}
+          {{ collection.title }}
+        {%- endif -%}
+      </h1>
+      {%- if collection.description != blank and section.settings.show_collection_description -%}
         <div class="section-subtitle center" style="margin: 12px auto 0;">
           {{ collection.description }}
         </div>
-      {%- else -%}
+      {%- elsif section.settings.fallback_description != blank -%}
         <p class="section-subtitle center" style="margin: 12px auto 0;">
-          Explore fast 15-minute hair darkening shampoos infused with Argan Oil, Biotin, Keratin, and Olive Extract.
+          {{ section.settings.fallback_description }}
         </p>
       {%- endif -%}
     </div>
 
     <!-- Quick Trust Badges Strip on Collection -->
-    <div class="collection-trust-strip">
-      <span class="trust-pill-mini">{% render 'icon-package', size: 12 %} Cash on Delivery</span>
-      <span class="trust-pill-mini">{% render 'icon-truck', size: 12 %} Free Delivery on Rs. 2,500+</span>
-      <span class="trust-pill-mini">{% render 'icon-shield', size: 12 %} 0% Ammonia Safe Formula</span>
-      <span class="trust-pill-mini">{% render 'icon-clock', size: 12 %} 15-Minute Results</span>
-    </div>
+    {%- if section.settings.show_trust_badges -%}
+      <div class="collection-trust-strip">
+        <span class="trust-pill-mini">{% render 'icon-package', size: 12 %} {{ section.settings.badge_1_text }}</span>
+        <span class="trust-pill-mini">{% render 'icon-truck', size: 12 %} {{ section.settings.badge_2_text }}</span>
+        <span class="trust-pill-mini">{% render 'icon-shield', size: 12 %} {{ section.settings.badge_3_text }}</span>
+        <span class="trust-pill-mini">{% render 'icon-clock', size: 12 %} {{ section.settings.badge_4_text }}</span>
+      </div>
+    {%- endif -%}
 
     {%- paginate collection.products by 12 -%}
       <div class="product-grid">
@@ -51,6 +59,65 @@
 {% schema %}
 {
   "name": "Main Collection",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Our Products"
+    },
+    {
+      "type": "text",
+      "id": "override_title",
+      "label": "Override Collection Title",
+      "info": "Leave blank to use the default collection title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "label": "Show Shopify Collection Description",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "fallback_description",
+      "label": "Fallback Description",
+      "default": "Explore fast 15-minute hair darkening shampoos infused with Argan Oil, Biotin, Keratin, and Olive Extract."
+    },
+    {
+      "type": "header",
+      "content": "Trust Badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Show Trust Badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_1_text",
+      "label": "Badge 1",
+      "default": "Cash on Delivery"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_text",
+      "label": "Badge 2",
+      "default": "Free Delivery on Rs. 2,500+"
+    },
+    {
+      "type": "text",
+      "id": "badge_3_text",
+      "label": "Badge 3",
+      "default": "0% Ammonia Safe Formula"
+    },
+    {
+      "type": "text",
+      "id": "badge_4_text",
+      "label": "Badge 4",
+      "default": "15-Minute Results"
+    }
+  ]
 }
 {% endschema %}

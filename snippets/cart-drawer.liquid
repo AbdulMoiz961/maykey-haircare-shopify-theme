@@ -10,20 +10,20 @@
   id="cartDrawerOverlay"
   role="dialog"
   aria-modal="true"
-  aria-label="{{ 'cart.general.title' | default: 'Shopping Cart' }}"
+  aria-label="Shopping Cart"
 >
   <div class="cart-drawer" id="cartDrawer" onclick="event.stopPropagation()">
     <!-- Header -->
     <div class="cart-drawer-head">
       <h3 class="cart-drawer-title">
-        {{ 'cart.general.title' | default: 'Your Cart' }}
+        Your Cart
         <span class="cart-count-badge" id="cartDrawerCount">({{ cart.item_count }})</span>
       </h3>
       <button
         type="button"
         class="cart-close-btn"
         id="cartDrawerCloseBtn"
-        aria-label="{{ 'general.accessibility.close' | default: 'Close cart' }}"
+        aria-label="Close cart"
       >
         {% render 'icon-close', size: 18 %}
       </button>
@@ -34,7 +34,7 @@
       {%- if remaining_for_free_shipping <= 0 -%}
         <div class="free-shipping-msg qualified">
           {% render 'icon-check', size: 14 %}
-          <span><strong>{{ 'cart.shipping.unlocked' | default: 'Congratulations! You unlocked Free Nationwide Delivery!' }}</strong></span>
+          <span><strong>Congratulations! You unlocked Free Nationwide Delivery!</strong></span>
         </div>
       {%- else -%}
         {%- assign progress_pct = cart_total | times: 100 | divided_by: free_shipping_threshold -%}
@@ -54,10 +54,10 @@
           <div class="cart-empty-icon">
             {% render 'icon-cart', size: 36 %}
           </div>
-          <p class="cart-empty-title">{{ 'cart.general.empty' | default: 'Your cart is empty' }}</p>
-          <p class="cart-empty-subtext">{{ 'cart.general.empty_subtext' | default: 'Explore our 15-minute hair darkening solutions.' }}</p>
+          <p class="cart-empty-title">Your cart is empty</p>
+          <p class="cart-empty-subtext">Explore our 15-minute hair darkening solutions.</p>
           <a href="{{ routes.all_products_collection_url }}" class="btn-primary cart-empty-btn">
-            {{ 'cart.general.continue_shopping' | default: 'Shop Shades' }}
+            Shop Shades
           </a>
         </div>
       {%- else -%}
@@ -116,6 +116,21 @@
               </div>
             </div>
           {%- endfor -%}
+
+          {%- if settings.show_cart_note -%}
+            <div class="cart-note-box" style="margin-top: 16px; border-top: 1px solid var(--border-light); padding-top: 16px;">
+              <label for="CartDrawer-Note" style="display: block; font-size: 0.875rem; margin-bottom: 8px; color: var(--charcoal); font-weight: 500;">
+                Add a delivery note
+              </label>
+              <textarea
+                id="CartDrawer-Note"
+                name="note"
+                class="cart-note-textarea"
+                style="width: 100%; min-height: 60px; padding: 8px; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.875rem; resize: vertical;"
+                placeholder="e.g. Call before delivery, deliver to gate..."
+              >{{ cart.note }}</textarea>
+            </div>
+          {%- endif -%}
         </form>
       {%- endif -%}
     </div>
@@ -124,21 +139,21 @@
     {%- if cart.item_count > 0 -%}
       <div class="cart-drawer-foot" id="cartDrawerFoot">
         <div class="cart-subtotal-row">
-          <span class="subtotal-label">{{ 'cart.general.subtotal' | default: 'Subtotal' }}</span>
+          <span class="subtotal-label">Subtotal</span>
           <span class="subtotal-amount" id="cartDrawerSubtotal">{{ cart.total_price | money }}</span>
         </div>
         <p class="cart-tax-shipping-note">
-          {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | default: 'Taxes included. Delivery calculated at checkout.' }}
+          Taxes included. Delivery calculated at checkout.
         </p>
 
-        <a href="{{ routes.cart_url }}/checkout" class="btn-primary btn-cart-checkout">
-          <span>{{ 'cart.general.checkout' | default: 'Proceed to Checkout' }}</span>
-          {% render 'icon-chevron', size: 14 %}
-        </a>
+        <button type="submit" form="cartDrawerForm" name="checkout" class="btn-primary btn-cart-checkout" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+          <span style="font-size: 1.1em;">&#128274;</span> <!-- Lock icon -->
+          <span>Proceed to Checkout</span>
+        </button>
 
-        <div class="cart-cod-badge">
-          {% render 'icon-package', size: 14 %}
-          <span>{{ settings.cod_notice_text | default: 'Cash on Delivery Available Across Pakistan' }}</span>
+        <div class="cart-cod-badge" style="background: var(--linen); padding: 12px; border-radius: var(--radius-sm); text-align: center; margin-top: 12px; border: 1px dashed var(--charcoal);">
+          {% render 'icon-package', size: 16 %}
+          <span style="font-weight: 600; color: var(--charcoal); font-size: 0.9rem;">{{ settings.cod_notice_text | default: 'Cash on Delivery Available Across Pakistan' }}</span>
         </div>
       </div>
     {%- endif -%}

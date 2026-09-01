@@ -1,0 +1,68 @@
+{% comment %}
+  Maykey Hair Care — Customer Login Section
+{% endcomment %}
+<section class="section customer-login-section" style="padding: 60px 0; background: var(--alabaster);">
+  <div class="container" style="max-width: 480px; margin: 0 auto;">
+    <div class="auth-card" style="background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 36px 32px; box-shadow: var(--shadow-sm);">
+      <div class="section-eyebrow center" style="margin-bottom: 8px;">Customer Portal</div>
+      <h1 class="section-title center" style="font-size: 28px; margin-bottom: 24px;">Sign In</h1>
+
+      {%- form 'customer_login' -%}
+        {%- if form.errors -%}
+          <div class="form-status-alert error" style="margin-bottom: 20px; padding: 12px; border-radius: var(--radius-sm); background: #fde8e8; color: #9b1c1c; font-size: 14px;">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="form-field" style="margin-bottom: 16px;">
+          <label for="CustomerEmail" class="form-label" style="display: block; margin-bottom: 6px; font-size: 14px; font-weight: 500;">Email Address</label>
+          <input
+            type="email"
+            name="customer[email]"
+            id="CustomerEmail"
+            class="form-input"
+            autocomplete="email"
+            autocorrect="off"
+            autocapitalize="off"
+            style="width: 100%; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: var(--radius-sm);"
+            required
+          >
+        </div>
+
+        {%- if form.password_needed -%}
+          <div class="form-field" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+              <label for="CustomerPassword" class="form-label" style="font-size: 14px; font-weight: 500;">Password</label>
+              <a href="#recover" id="RecoverPassword" style="font-size: 12px; color: var(--accent-gold); text-decoration: underline;">Forgot password?</a>
+            </div>
+            <input
+              type="password"
+              name="customer[password]"
+              id="CustomerPassword"
+              class="form-input"
+              autocomplete="current-password"
+              style="width: 100%; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: var(--radius-sm);"
+              required
+            >
+          </div>
+        {%- endif -%}
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 14px 20px;">
+          <span>Sign In</span>
+        </button>
+
+        <div class="auth-switch" style="text-align: center; margin-top: 24px; font-size: 14px; color: var(--muted);">
+          Don't have an account? 
+          <a href="{{ routes.account_register_url }}" style="color: var(--onyx); font-weight: 600; text-decoration: underline;">Create account</a>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Login",
+  "settings": []
+}
+{% endschema %}

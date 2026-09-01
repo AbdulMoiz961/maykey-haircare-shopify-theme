@@ -363,6 +363,10 @@
         "eyebrow": "Got Questions?",
         "headline": "Frequently Asked<br><em>Questions</em>"
       }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
     }
   },
   "order": [
@@ -372,6 +376,7 @@
     "shade_selector",
     "ingredients",
     "how_to_use",
-    "faq_accordion"
+    "faq_accordion",
+    "newsletter"
   ]
 }

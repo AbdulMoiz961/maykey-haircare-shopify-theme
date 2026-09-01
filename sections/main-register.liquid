@@ -1,0 +1,87 @@
+{% comment %}
+  Maykey Hair Care — Customer Register Section
+{% endcomment %}
+<section class="section customer-register-section" style="padding: 60px 0; background: var(--alabaster);">
+  <div class="container" style="max-width: 480px; margin: 0 auto;">
+    <div class="auth-card" style="background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 36px 32px; box-shadow: var(--shadow-sm);">
+      <div class="section-eyebrow center" style="margin-bottom: 8px;">Maykey Family</div>
+      <h1 class="section-title center" style="font-size: 28px; margin-bottom: 24px;">Create Account</h1>
+
+      {%- form 'create_customer' -%}
+        {%- if form.errors -%}
+          <div class="form-status-alert error" style="margin-bottom: 20px; padding: 12px; border-radius: var(--radius-sm); background: #fde8e8; color: #9b1c1c; font-size: 14px;">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="form-field" style="margin-bottom: 16px;">
+          <label for="RegisterFirstName" class="form-label" style="display: block; margin-bottom: 6px; font-size: 14px; font-weight: 500;">First Name</label>
+          <input
+            type="text"
+            name="customer[first_name]"
+            id="RegisterFirstName"
+            class="form-input"
+            autocomplete="given-name"
+            style="width: 100%; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: var(--radius-sm);"
+          >
+        </div>
+
+        <div class="form-field" style="margin-bottom: 16px;">
+          <label for="RegisterLastName" class="form-label" style="display: block; margin-bottom: 6px; font-size: 14px; font-weight: 500;">Last Name</label>
+          <input
+            type="text"
+            name="customer[last_name]"
+            id="RegisterLastName"
+            class="form-input"
+            autocomplete="family-name"
+            style="width: 100%; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: var(--radius-sm);"
+          >
+        </div>
+
+        <div class="form-field" style="margin-bottom: 16px;">
+          <label for="RegisterEmail" class="form-label" style="display: block; margin-bottom: 6px; font-size: 14px; font-weight: 500;">Email Address</label>
+          <input
+            type="email"
+            name="customer[email]"
+            id="RegisterEmail"
+            class="form-input"
+            autocomplete="email"
+            autocorrect="off"
+            autocapitalize="off"
+            style="width: 100%; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: var(--radius-sm);"
+            required
+          >
+        </div>
+
+        <div class="form-field" style="margin-bottom: 24px;">
+          <label for="RegisterPassword" class="form-label" style="display: block; margin-bottom: 6px; font-size: 14px; font-weight: 500;">Password</label>
+          <input
+            type="password"
+            name="customer[password]"
+            id="RegisterPassword"
+            class="form-input"
+            autocomplete="new-password"
+            style="width: 100%; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: var(--radius-sm);"
+            required
+          >
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 14px 20px;">
+          <span>Create Account</span>
+        </button>
+
+        <div class="auth-switch" style="text-align: center; margin-top: 24px; font-size: 14px; color: var(--muted);">
+          Already have an account? 
+          <a href="{{ routes.account_login_url }}" style="color: var(--onyx); font-weight: 600; text-decoration: underline;">Sign in</a>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Register",
+  "settings": []
+}
+{% endschema %}
