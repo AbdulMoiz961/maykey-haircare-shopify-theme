@@ -5,11 +5,60 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCartDrawer();
+  initMobileNav();
   initAccordions();
   initHeroTabs();
+  initHeroParallax();
   initShadeTabs();
   initScrollAnimations();
 });
+
+/* ============================================================
+   0. MOBILE NAVIGATION DRAWER
+   ============================================================ */
+function initMobileNav() {
+  const overlay = document.getElementById('mobileNavOverlay');
+  const toggleBtn = document.getElementById('mobileMenuToggle');
+  const closeBtn = document.getElementById('mobileNavClose');
+  const accordionTrigger = document.querySelector('.mobile-nav-accordion-trigger');
+
+  if (!overlay || !toggleBtn) return;
+
+  function openMenu() {
+    overlay.classList.add('open');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    overlay.classList.remove('open');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggleBtn.addEventListener('click', openMenu);
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+
+  // Mobile submenu accordion
+  if (accordionTrigger) {
+    accordionTrigger.addEventListener('click', () => {
+      const parent = accordionTrigger.closest('.mobile-nav-accordion');
+      const isExpanded = accordionTrigger.getAttribute('aria-expanded') === 'true';
+      accordionTrigger.setAttribute('aria-expanded', !isExpanded);
+      parent.classList.toggle('open');
+    });
+  }
+}
 
 /* ============================================================
    1. CART DRAWER & AJAX CART API
@@ -269,5 +318,45 @@ function initScrollAnimations() {
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     observer.observe(el);
+  });
+}
+
+/* ============================================================
+   6. HERO 3D CURSOR PARALLAX INTERACTION
+   ============================================================ */
+function initHeroParallax() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const mediaWrap = document.querySelector('.hero-media-wrap');
+  if (!mediaWrap) return;
+
+  const images = mediaWrap.querySelectorAll('.hero-media-img, .product-card-placeholder');
+  let rafId = null;
+
+  mediaWrap.addEventListener('mousemove', (e) => {
+    const rect = mediaWrap.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const xNorm = (x / rect.width - 0.5) * 2;
+    const yNorm = (y / rect.height - 0.5) * 2;
+
+    const rotX = -yNorm * 5;
+    const rotY = xNorm * 7;
+
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      images.forEach((img) => {
+        img.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px) scale(1.02)`;
+      });
+    });
+  });
+
+  mediaWrap.addEventListener('mouseleave', () => {
+    if (rafId) cancelAnimationFrame(rafId);
+    images.forEach((img) => {
+      img.style.transform = '';
+    });
   });
 }

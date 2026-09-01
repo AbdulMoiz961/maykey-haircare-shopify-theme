@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "contact_form": {
+      "type": "contact-form",
+      "settings": {
+        "eyebrow": "Get In Touch",
+        "title": "We Are Here to Help.",
+        "description": "Have questions about picking the right shade, application instructions, or your order tracking? Our dedicated support team is ready to assist.",
+        "email": "support@maykey.pk",
+        "hours": "Mon – Sat: 9:00 AM – 9:00 PM PKT",
+        "form_title": "Send a Message",
+        "form_subtitle": "Fill out the form below and we will respond within 24 hours."
+      }
+    }
+  },
+  "order": [
+    "contact_form"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main_list_collections": {
+      "type": "main-list-collections",
+      "settings": {
+        "eyebrow": "Our Catalog",
+        "title": "Shop by Format & Collection",
+        "description": "Discover fast 15-minute hair darkening formulations available in full-size pump bottles and travel-friendly sachet packs.",
+        "display_type": "curated"
+      }
+    }
+  },
+  "order": [
+    "main_list_collections"
+  ]
+}

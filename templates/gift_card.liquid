@@ -1,0 +1,27 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'gift_cards.issued.title' | default: 'Your Gift Card' }}</title>
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+</head>
+<body class="gift-card-body" style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--bg-canvas, #F9F8F6); font-family: var(--font-body, sans-serif); padding: 24px;">
+  <div style="background: #ffffff; border: 1px solid #e5e0d8; border-radius: 12px; padding: 40px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+    <h1 style="font-family: var(--font-display, serif); font-size: 28px; margin-bottom: 12px; color: #1a1a1a;">{{ shop.name }}</h1>
+    <p style="color: #666; margin-bottom: 24px;">{{ 'gift_cards.issued.subtext' | default: 'Here is your gift card!' }}</p>
+    <div style="background: #f4f0eb; padding: 20px; border-radius: 8px; font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #1a1a1a; margin-bottom: 24px;">
+      {{ gift_card.code | format_code }}
+    </div>
+    <div style="font-size: 18px; font-weight: 600; color: #2d5a27; margin-bottom: 24px;">
+      {{ gift_card.balance | money }}
+    </div>
+    <a href="{{ shop.url }}" style="display: inline-block; background: #1a1a1a; color: #ffffff; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600;">
+      {{ 'gift_cards.issued.shop_link' | default: 'Start Shopping' }}
+    </a>
+  </div>
+</body>
+</html>

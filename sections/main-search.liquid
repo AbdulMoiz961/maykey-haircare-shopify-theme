@@ -1,0 +1,91 @@
+{% comment %}
+  Maykey Hair Care — Main Search Results Section
+{% endcomment %}
+<section class="section search-page-section" id="mainSearchSection">
+  <div class="container">
+    <div class="search-header-box">
+      <div class="section-eyebrow center">{{ 'Search Store' }}</div>
+      <h1 class="section-title">
+        {%- if search.performed -%}
+          Search Results
+        {%- else -%}
+          Search Products
+        {%- endif -%}
+      </h1>
+
+      <form action="{{ routes.search_url }}" method="get" class="search-page-form" role="search">
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="Search for shades, bottles, sachets..."
+          class="search-page-input"
+          aria-label="Search store products"
+          required
+        >
+        <button type="submit" class="btn-primary btn-search-submit" aria-label="Search">
+          {% render 'icon-search', size: 18 %}
+          <span>Search</span>
+        </button>
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      <div class="search-meta-bar">
+        <p class="search-count-text">
+          {%- if search.results_count == 0 -%}
+            No results found for <strong class="query-term">"{{ search.terms }}"</strong>. Try searching for "bottle", "sachet", or a shade name.
+          {%- else -%}
+            Found <strong>{{ search.results_count }}</strong> {{ search.results_count | pluralize: 'result', 'results' }} for <strong class="query-term">"{{ search.terms }}"</strong>
+          {%- endif -%}
+        </p>
+      </div>
+
+      {%- if search.results_count > 0 -%}
+        {%- paginate search.results by 12 -%}
+          <div class="product-grid search-results-grid">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product: item, show_quick_add: true %}
+              {%- else -%}
+                <div class="search-article-card">
+                  <span class="search-article-tag">{{ item.object_type | capitalize }}</span>
+                  <h3 class="search-article-title">
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                  </h3>
+                  <p class="search-article-excerpt">{{ item.content | strip_html | truncate: 120 }}</p>
+                  <a href="{{ item.url }}" class="btn-article-link">Read More →</a>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <div class="pagination-wrap">
+              {{ paginate | default_pagination }}
+            </div>
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        <!-- Popular Suggestion Tags when 0 results -->
+        <div class="search-suggestions-box">
+          <span class="suggestions-label">Popular Searches:</span>
+          <div class="suggestion-pills">
+            <a href="{{ routes.search_url }}?q=250ml+bottle" class="suggestion-pill">250ml Bottle</a>
+            <a href="{{ routes.search_url }}?q=sachet" class="suggestion-pill">30ml Sachet</a>
+            <a href="{{ routes.search_url }}?q=natural+black" class="suggestion-pill">Natural Black</a>
+            <a href="{{ routes.search_url }}?q=dark+brown" class="suggestion-pill">Dark Brown</a>
+            <a href="{{ routes.search_url }}?q=light+brown" class="suggestion-pill">Light Brown</a>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search Results",
+  "settings": []
+}
+{% endschema %}

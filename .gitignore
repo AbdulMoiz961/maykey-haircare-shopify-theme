@@ -3,6 +3,9 @@
 Thumbs.db
 desktop.ini
 
+# Raw asset backups
+res_121/
+
 # Shopify CLI temp files
 .shopify/
 .env

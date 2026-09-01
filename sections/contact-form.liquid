@@ -1,0 +1,231 @@
+{% comment %}
+  Maykey Hair Care — Dedicated Contact & Support Section
+{% endcomment %}
+<section class="section contact-section" id="contactSection">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- LEFT: Contact Information & Direct Channels -->
+      <div class="contact-info-col">
+        <div class="section-eyebrow">{{ section.settings.eyebrow | default: 'Get In Touch' }}</div>
+        <h1 class="section-title">{{ section.settings.title | default: 'We Are Here to Help.' }}</h1>
+        <p class="contact-lead-desc">
+          {{ section.settings.description | default: 'Have questions about picking the right shade, application instructions, or your order tracking? Our dedicated support team is ready to assist.' }}
+        </p>
+
+        <!-- Direct WhatsApp Card -->
+        {%- assign whatsapp_number = settings.whatsapp_number | default: '923000000000' -%}
+        <div class="contact-channel-card highlight-wa">
+          <div class="channel-icon-box wa-box">
+            {% render 'icon-chat', size: 24 %}
+          </div>
+          <div class="channel-details">
+            <span class="channel-tag">Fastest Response</span>
+            <h3 class="channel-title">WhatsApp Support</h3>
+            <p class="channel-sub">Instant assistance on shades & order tracking.</p>
+            <a
+              href="https://wa.me/{{ whatsapp_number }}?text=Hi%20Maykey%20Hair%20Care!%20I%20have%20an%20inquiry."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-channel-action"
+            >
+              <span>Chat on WhatsApp</span>
+              {% render 'icon-chevron', size: 12 %}
+            </a>
+          </div>
+        </div>
+
+        <!-- Secondary Channels Grid -->
+        <div class="contact-channels-subgrid">
+          <div class="contact-channel-card">
+            <div class="channel-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="channel-details">
+              <h4 class="channel-title">Email Inquiries</h4>
+              <p class="channel-val">{{ section.settings.email | default: 'support@maykey.pk' }}</p>
+            </div>
+          </div>
+
+          <div class="contact-channel-card">
+            <div class="channel-icon-box">
+              {% render 'icon-clock', size: 20 %}
+            </div>
+            <div class="channel-details">
+              <h4 class="channel-title">Working Hours</h4>
+              <p class="channel-val">{{ section.settings.hours | default: 'Mon – Sat: 9:00 AM – 9:00 PM PKT' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-trust-bar">
+          <div class="trust-mini-pill">
+            {% render 'icon-package', size: 14 %}
+            <span>Nationwide Cash on Delivery</span>
+          </div>
+          <div class="trust-mini-pill">
+            {% render 'icon-truck', size: 14 %}
+            <span>Free Shipping on Rs. 2,500+</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Interactive Contact Form -->
+      <div class="contact-form-col">
+        <div class="contact-form-box">
+          <h2 class="form-box-title">{{ section.settings.form_title | default: 'Send a Message' }}</h2>
+          <p class="form-box-subtitle">{{ section.settings.form_subtitle | default: 'Fill out the form below and we will respond within 24 hours.' }}</p>
+
+          {%- form 'contact', id: 'MaykeyContactForm' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="form-status-alert success" role="alert">
+                {% render 'icon-check', size: 18 %}
+                <div>
+                  <strong>Thank you for contacting Maykey!</strong>
+                  <p>Your message has been received. Our team will get back to you shortly.</p>
+                </div>
+              </div>
+            {%- elsif form.errors -%}
+              <div class="form-status-alert error" role="alert">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <div>
+                  <strong>Please correct the following errors:</strong>
+                  <ul>
+                    {%- for field in form.errors -%}
+                      <li>{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </div>
+            {%- endif -%}
+
+            <div class="form-field-group">
+              <div class="form-field">
+                <label for="ContactFormName" class="form-label">Your Name <span class="required">*</span></label>
+                <input
+                  type="text"
+                  name="contact[name]"
+                  id="ContactFormName"
+                  class="form-input"
+                  placeholder="e.g. Ali Ahmed"
+                  value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                  required
+                >
+              </div>
+
+              <div class="form-field">
+                <label for="ContactFormPhone" class="form-label">Phone Number (WhatsApp) <span class="required">*</span></label>
+                <input
+                  type="tel"
+                  name="contact[phone]"
+                  id="ContactFormPhone"
+                  class="form-input"
+                  placeholder="e.g. 0300 1234567"
+                  value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="ContactFormEmail" class="form-label">Email Address <span class="required">*</span></label>
+              <input
+                type="email"
+                name="contact[email]"
+                id="ContactFormEmail"
+                class="form-input"
+                placeholder="name@example.com"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                required
+                spellcheck="false"
+                autocomplete="email"
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="ContactFormSubject" class="form-label">Inquiry Subject</label>
+              <select name="contact[subject]" id="ContactFormSubject" class="form-select">
+                <option value="Shade Recommendation">Shade Recommendation & Hair Guidance</option>
+                <option value="Order Tracking / Delivery">Order Tracking & Delivery Status</option>
+                <option value="Cash on Delivery Question">Cash on Delivery (COD) Inquiries</option>
+                <option value="Wholesale & Salons">Wholesale & Salon Bulk Orders</option>
+                <option value="Other">General Questions</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="ContactFormMessage" class="form-label">Your Message <span class="required">*</span></label>
+              <textarea
+                name="contact[body]"
+                id="ContactFormMessage"
+                class="form-textarea"
+                rows="5"
+                placeholder="Please describe how we can help you..."
+                required
+              >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            </div>
+
+            <button type="submit" class="btn-primary btn-submit-contact">
+              <span>Send Message</span>
+              {% render 'icon-chevron', size: 14 %}
+            </button>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Get In Touch"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "We Are Here to Help."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Have questions about picking the right shade, application instructions, or your order tracking? Our dedicated support team is ready to assist."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Support Email",
+      "default": "support@maykey.pk"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Working Hours",
+      "default": "Mon – Sat: 9:00 AM – 9:00 PM PKT"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form Box Title",
+      "default": "Send a Message"
+    },
+    {
+      "type": "text",
+      "id": "form_subtitle",
+      "label": "Form Box Subtitle",
+      "default": "Fill out the form below and we will respond within 24 hours."
+    }
+  ]
+}
+{% endschema %}

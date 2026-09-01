@@ -1,9 +1,9 @@
 [
   {
-    "name": "Theme info",
+    "name": "theme_info",
     "theme_name": "Maykey Hair Care",
-    "theme_version": "1.0.0",
     "theme_author": "Maykey Design Team",
+    "theme_version": "1.0.0",
     "theme_documentation_url": "https://maykey.pk",
     "theme_support_url": "https://maykey.pk"
   },

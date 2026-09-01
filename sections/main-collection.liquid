@@ -1,14 +1,28 @@
 {% comment %}
   Maykey Hair Care — Collection Grid Section
 {% endcomment %}
-<section class="section collection-section">
+<section class="section collection-section" id="collectionSection">
   <div class="container">
-    <div style="text-align: center; margin-bottom: 40px;">
-      <div class="section-eyebrow center">{{ 'Shop Collection' }}</div>
+    <div class="collection-header-box">
+      <div class="section-eyebrow center">{{ 'Our Products' }}</div>
       <h1 class="section-title">{{ collection.title }}</h1>
       {%- if collection.description != blank -%}
-        <p class="section-subtitle" style="margin: 12px auto 0; text-align: center;">{{ collection.description }}</p>
+        <div class="section-subtitle center" style="margin: 12px auto 0;">
+          {{ collection.description }}
+        </div>
+      {%- else -%}
+        <p class="section-subtitle center" style="margin: 12px auto 0;">
+          Explore fast 15-minute hair darkening shampoos infused with Argan Oil, Biotin, Keratin, and Olive Extract.
+        </p>
       {%- endif -%}
+    </div>
+
+    <!-- Quick Trust Badges Strip on Collection -->
+    <div class="collection-trust-strip">
+      <span class="trust-pill-mini">{% render 'icon-package', size: 12 %} Cash on Delivery</span>
+      <span class="trust-pill-mini">{% render 'icon-truck', size: 12 %} Free Delivery on Rs. 2,500+</span>
+      <span class="trust-pill-mini">{% render 'icon-shield', size: 12 %} 0% Ammonia Safe Formula</span>
+      <span class="trust-pill-mini">{% render 'icon-clock', size: 12 %} 15-Minute Results</span>
     </div>
 
     {%- paginate collection.products by 12 -%}
@@ -16,14 +30,17 @@
         {%- for product in collection.products -%}
           {% render 'product-card', product: product, show_quick_add: true %}
         {%- else -%}
-          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0;">
-            <p style="color: var(--muted); font-size: 16px;">No products found in this collection.</p>
+          <div class="collection-empty-box">
+            <p>No products found in this collection.</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn-primary" style="margin-top: 16px;">
+              <span>View All Products</span>
+            </a>
           </div>
         {%- endfor -%}
       </div>
 
       {%- if paginate.pages > 1 -%}
-        <div style="margin-top: 40px; text-align: center;">
+        <div class="pagination-wrap">
           {{ paginate | default_pagination }}
         </div>
       {%- endif -%}

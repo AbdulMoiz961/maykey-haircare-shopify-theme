@@ -1,0 +1,60 @@
+{% comment %}
+  Maykey Hair Care — Article Post Section
+{% endcomment %}
+<article class="section article-section">
+  <div class="container article-container">
+    <div class="article-header">
+      <div class="article-meta">
+        <a href="{{ blog.url }}" class="article-blog-link">← {{ blog.title }}</a>
+        <span class="article-date">{{ article.published_at | date: "%B %d, %Y" }}</span>
+        {%- if article.tags.size > 0 -%}
+          <span class="article-tag">{{ article.tags.first }}</span>
+        {%- endif -%}
+      </div>
+      <h1 class="article-title">{{ article.title }}</h1>
+    </div>
+
+    {%- if article.image -%}
+      <div class="article-featured-media">
+        <img
+          src="{{ article.image | image_url: width: 1200 }}"
+          alt="{{ article.image.alt | default: article.title | escape }}"
+          class="article-featured-img"
+          loading="eager"
+          width="800"
+          height="450"
+        >
+      </div>
+    {%- endif -%}
+
+    <div class="article-content rte">
+      {{ article.content }}
+    </div>
+
+    <div class="article-footer">
+      <div class="article-share-box">
+        <span>Share this guide:</span>
+        <a
+          href="https://wa.me/?text={{ article.title | url_encode }}%20{{ shop.url }}{{ article.url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="share-btn wa-share"
+        >
+          {% render 'icon-chat', size: 14 %}
+          <span>WhatsApp</span>
+        </a>
+      </div>
+
+      <a href="{{ blog.url }}" class="btn-secondary">
+        <span>Back to All Articles</span>
+      </a>
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article Post",
+  "settings": []
+}
+{% endschema %}

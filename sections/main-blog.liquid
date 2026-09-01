@@ -1,0 +1,84 @@
+{% comment %}
+  Maykey Hair Care — Blog Listing Section (Editorial Magazine Style)
+{% endcomment %}
+<section class="section blog-section" id="blogSection">
+  <div class="container">
+    <div class="blog-header-box">
+      <div class="section-eyebrow center">{{ 'Hair Care Journal' }}</div>
+      <h1 class="section-title">{{ blog.title }}</h1>
+      <p class="section-subtitle center">
+        Expert guides, hair darkening tips, and botanical formulation insights.
+      </p>
+    </div>
+
+    {%- paginate blog.articles by 9 -%}
+      <div class="blog-articles-grid">
+        {%- for article in blog.articles -%}
+          <article class="blog-card">
+            <div class="blog-card-media">
+              <a href="{{ article.url }}" aria-label="{{ article.title | escape }}">
+                {%- if article.image -%}
+                  <img
+                    src="{{ article.image | image_url: width: 600 }}"
+                    alt="{{ article.image.alt | default: article.title | escape }}"
+                    class="blog-card-img"
+                    loading="lazy"
+                    width="400"
+                    height="250"
+                  >
+                {%- else -%}
+                  <div class="blog-card-placeholder">
+                    {% render 'icon-leaf', size: 40 %}
+                  </div>
+                {%- endif -%}
+              </a>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-date">{{ article.published_at | date: "%B %d, %Y" }}</span>
+                {%- if article.tags.size > 0 -%}
+                  <span class="blog-tag">{{ article.tags.first }}</span>
+                {%- endif -%}
+              </div>
+
+              <h2 class="blog-card-title">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h2>
+
+              <p class="blog-card-excerpt">
+                {%- if article.excerpt.size > 0 -%}
+                  {{ article.excerpt | strip_html | truncate: 120 }}
+                {%- else -%}
+                  {{ article.content | strip_html | truncate: 120 }}
+                {%- endif -%}
+              </p>
+
+              <a href="{{ article.url }}" class="btn-read-article">
+                <span>Read Article</span>
+                {% render 'icon-chevron', size: 12 %}
+              </a>
+            </div>
+          </article>
+        {%- else -%}
+          <div class="blog-empty-state">
+            <p>No articles published yet. Stay tuned for hair care guides!</p>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div class="pagination-wrap">
+          {{ paginate | default_pagination }}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog Listing",
+  "settings": []
+}
+{% endschema %}

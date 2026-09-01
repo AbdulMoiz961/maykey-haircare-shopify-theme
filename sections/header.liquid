@@ -1,5 +1,5 @@
 {% comment %}
-  Maykey Hair Care — Sticky Header Section
+  Maykey Hair Care — Sticky Header & Mobile Navigation Drawer
 {% endcomment %}
 <header class="site-header-wrapper" id="siteHeader">
   <div class="container site-header">
@@ -11,8 +11,9 @@
             src="{{ section.settings.logo | image_url: width: 300 }}"
             alt="{{ section.settings.logo.alt | default: shop.name }}"
             class="header-logo-img"
-            width="{{ section.settings.logo_width }}"
+            width="{{ section.settings.logo_width | default: 140 }}"
             height="auto"
+            loading="eager"
           >
         {%- else -%}
           <span class="header-logo-text">{{ shop.name }}</span>
@@ -20,11 +21,12 @@
       </a>
     </div>
 
-    <!-- Navigation Menu -->
+    <!-- Desktop Navigation Menu -->
     <nav class="header-nav" role="navigation" aria-label="Primary Navigation">
       <ul class="header-nav-list">
         {%- for link in section.settings.menu.links -%}
-          {%- if link.title contains 'Shade' or link.title contains 'shades' -%}
+          {%- assign link_title_downcase = link.title | downcase -%}
+          {%- if link_title_downcase contains 'shade' -%}
             <li class="shade-dropdown">
               <button
                 type="button"
@@ -52,7 +54,7 @@
             </li>
           {%- else -%}
             <li>
-              <a href="{{ link.url }}" class="header-nav-link">
+              <a href="{{ link.url }}" class="header-nav-link {% if link.active %}active{% endif %}">
                 {{ link.title }}
               </a>
             </li>
@@ -81,7 +83,8 @@
         type="button"
         class="mobile-menu-toggle"
         id="mobileMenuToggle"
-        aria-label="Open mobile menu"
+        aria-label="Open mobile navigation menu"
+        aria-expanded="false"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="3" y1="6" x2="21" y2="6"/>
@@ -92,6 +95,108 @@
     </div>
   </div>
 </header>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-title">{{ shop.name }}</span>
+      <button type="button" class="mobile-nav-close" id="mobileNavClose" aria-label="Close navigation menu">
+        {% render 'icon-close', size: 20 %}
+      </button>
+    </div>
+
+    <div class="mobile-nav-body">
+      <!-- Search Bar Shortcut -->
+      <form action="{{ routes.search_url }}" method="get" class="mobile-nav-search">
+        <input type="text" name="q" placeholder="Search hair darkening products..." aria-label="Search store">
+        <button type="submit" aria-label="Submit search">
+          {% render 'icon-search', size: 18 %}
+        </button>
+      </form>
+
+      <!-- Nav Links -->
+      <ul class="mobile-nav-list">
+        <li>
+          <a href="{{ routes.root_url }}" class="mobile-nav-link">Home</a>
+        </li>
+        <li>
+          <a href="{{ routes.all_products_collection_url }}" class="mobile-nav-link">Shop All Products</a>
+        </li>
+
+        <!-- Shades Accordion -->
+        <li class="mobile-nav-accordion">
+          <button type="button" class="mobile-nav-accordion-trigger" aria-expanded="false">
+            <span>Explore Shades</span>
+            {% render 'icon-chevron', size: 14 %}
+          </button>
+          <div class="mobile-nav-submenu">
+            <a href="/products/maykey-hair-darkening-shampoo-250ml?variant=natural-black" class="mobile-submenu-item">
+              <span class="shade-swatch-circle" style="background-color: var(--shade-natural-black);"></span>
+              <div>
+                <strong>Natural Black</strong>
+                <span>100% Gray Coverage</span>
+              </div>
+            </a>
+            <a href="/products/maykey-hair-darkening-shampoo-250ml?variant=dark-brown" class="mobile-submenu-item">
+              <span class="shade-swatch-circle" style="background-color: var(--shade-dark-brown);"></span>
+              <div>
+                <strong>Dark Brown</strong>
+                <span>Rich Golden Tones</span>
+              </div>
+            </a>
+            <a href="/products/maykey-hair-darkening-shampoo-250ml?variant=light-brown" class="mobile-submenu-item">
+              <span class="shade-swatch-circle" style="background-color: var(--shade-light-brown);"></span>
+              <div>
+                <strong>Light Brown</strong>
+                <span>Natural Caramel Glow</span>
+              </div>
+            </a>
+          </div>
+        </li>
+
+        {%- for link in section.settings.menu.links -%}
+          {%- assign l_title = link.title | downcase -%}
+          {%- unless l_title contains 'home' or l_title contains 'shade' or l_title contains 'all' -%}
+            <li>
+              <a href="{{ link.url }}" class="mobile-nav-link">{{ link.title }}</a>
+            </li>
+          {%- endunless -%}
+        {%- endfor -%}
+
+        <li>
+          <a href="/pages/contact" class="mobile-nav-link">Contact & Support</a>
+        </li>
+      </ul>
+
+      <!-- Direct WhatsApp Action in Drawer -->
+      {%- assign whatsapp_number = settings.whatsapp_number | default: '923000000000' -%}
+      <div class="mobile-nav-whatsapp-card">
+        <div class="mobile-nav-wa-header">
+          <span class="wa-dot"></span>
+          <strong>WhatsApp Support Available</strong>
+        </div>
+        <p>Questions about shades, orders or delivery? Chat with our team directly.</p>
+        <a
+          href="https://wa.me/{{ whatsapp_number }}?text=Hi%20Maykey%20Hair%20Care!%20I%20have%20a%20question."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-mobile-wa"
+        >
+          {% render 'icon-chat', size: 16 %}
+          <span>Chat on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-footer">
+      <div class="mobile-nav-trust">
+        <span>{% render 'icon-package', size: 14 %} Cash on Delivery Nationwide</span>
+        <span>{% render 'icon-truck', size: 14 %} Free Delivery on Rs. 2,500+</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% schema %}
 {
@@ -105,8 +210,8 @@
     {
       "type": "range",
       "id": "logo_width",
-      "min": 50,
-      "max": 250,
+      "min": 80,
+      "max": 220,
       "step": 5,
       "unit": "px",
       "label": "Logo Width",

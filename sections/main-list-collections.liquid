@@ -1,0 +1,154 @@
+{% comment %}
+  Maykey Hair Care — Catalog / Collections Showcase Section
+{% endcomment %}
+<section class="section list-collections-section" id="listCollectionsSection">
+  <div class="container">
+    <div class="collections-header">
+      <div class="section-eyebrow center">{{ section.settings.eyebrow | default: 'Our Catalog' }}</div>
+      <h1 class="section-title">{{ section.settings.title | default: 'Shop by Format & Collection' }}</h1>
+      <p class="section-subtitle center">
+        {{ section.settings.description | default: 'Discover fast 15-minute hair darkening formulations available in full-size pump bottles and travel-friendly sachet packs.' }}
+      </p>
+    </div>
+
+    <div class="collections-grid">
+      {%- if collections.size > 0 and section.settings.display_type == 'all' -%}
+        {%- for collection in collections -%}
+          {%- unless collection.handle == 'frontpage' -%}
+            <div class="collection-card">
+              <div class="collection-card-media">
+                <a href="{{ collection.url }}" class="collection-card-link" aria-label="{{ collection.title | escape }}">
+                  {%- if collection.featured_image -%}
+                    <img
+                      src="{{ collection.featured_image | image_url: width: 600 }}"
+                      alt="{{ collection.title | escape }}"
+                      class="collection-card-img"
+                      loading="lazy"
+                      width="400"
+                      height="300"
+                    >
+                  {%- else -%}
+                    <div class="collection-card-placeholder">
+                      {% render 'icon-bottle', size: 48 %}
+                    </div>
+                  {%- endif -%}
+                </a>
+                <span class="collection-count-badge">{{ collection.all_products_count }} {{ collection.all_products_count | pluralize: 'Product', 'Products' }}</span>
+              </div>
+              <div class="collection-card-body">
+                <h3 class="collection-card-title">
+                  <a href="{{ collection.url }}">{{ collection.title }}</a>
+                </h3>
+                <p class="collection-card-desc">{{ collection.description | strip_html | truncate: 90 }}</p>
+                <a href="{{ collection.url }}" class="btn-collection-link">
+                  <span>Explore Collection</span>
+                  {% render 'icon-chevron', size: 12 %}
+                </a>
+              </div>
+            </div>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Curated Product / Category Showcase Cards -->
+        <div class="collection-card featured">
+          <div class="collection-card-media">
+            <a href="/products/maykey-hair-darkening-shampoo-250ml" class="collection-card-link" aria-label="250ml Pump Bottle">
+              <div class="collection-card-placeholder highlight-bottle">
+                {% render 'icon-bottle', size: 56 %}
+              </div>
+            </a>
+            <span class="collection-count-badge gold">Best Value</span>
+          </div>
+          <div class="collection-card-body">
+            <h3 class="collection-card-title">
+              <a href="/products/maykey-hair-darkening-shampoo-250ml">250ml Pump Bottle</a>
+            </h3>
+            <p class="collection-card-desc">8+ applications per bottle. Ammonia-free botanical care with pump dispenser.</p>
+            <a href="/products/maykey-hair-darkening-shampoo-250ml" class="btn-collection-link">
+              <span>View 250ml Bottle</span>
+              {% render 'icon-chevron', size: 12 %}
+            </a>
+          </div>
+        </div>
+
+        <div class="collection-card">
+          <div class="collection-card-media">
+            <a href="/products/maykey-hair-darkening-shampoo-30ml" class="collection-card-link" aria-label="30ml Sachet Pack">
+              <div class="collection-card-placeholder">
+                {% render 'icon-package', size: 56 %}
+              </div>
+            </a>
+            <span class="collection-count-badge">Travel Friendly</span>
+          </div>
+          <div class="collection-card-body">
+            <h3 class="collection-card-title">
+              <a href="/products/maykey-hair-darkening-shampoo-30ml">30ml Sachet Pack</a>
+            </h3>
+            <p class="collection-card-desc">Single-use convenience for quick touch-ups and on-the-go hair darkening.</p>
+            <a href="/products/maykey-hair-darkening-shampoo-30ml" class="btn-collection-link">
+              <span>View 30ml Sachets</span>
+              {% render 'icon-chevron', size: 12 %}
+            </a>
+          </div>
+        </div>
+
+        <div class="collection-card">
+          <div class="collection-card-media">
+            <a href="/collections/all" class="collection-card-link" aria-label="All Hair Darkening Shades">
+              <div class="collection-card-placeholder shades-bg">
+                {% render 'icon-sparkle', size: 56 %}
+              </div>
+            </a>
+            <span class="collection-count-badge">3 Shades</span>
+          </div>
+          <div class="collection-card-body">
+            <h3 class="collection-card-title">
+              <a href="/collections/all">All Hair Darkening Shades</a>
+            </h3>
+            <p class="collection-card-desc">Explore Natural Black, Dark Brown, and Light Brown shades for men and women.</p>
+            <a href="/collections/all" class="btn-collection-link">
+              <span>Shop All Products</span>
+              {% render 'icon-chevron', size: 12 %}
+            </a>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections List",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our Catalog"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop by Format & Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover fast 15-minute hair darkening formulations available in full-size pump bottles and travel-friendly sachet packs."
+    },
+    {
+      "type": "select",
+      "id": "display_type",
+      "label": "Display Collections",
+      "options": [
+        { "value": "all", "label": "All Store Collections" },
+        { "value": "curated", "label": "Curated Product Categories" }
+      ],
+      "default": "curated"
+    }
+  ]
+}
+{% endschema %}

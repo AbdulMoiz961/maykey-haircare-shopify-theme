@@ -12,7 +12,14 @@
             <div class="cart-item" style="padding: 16px 0;">
               <div class="cart-item-img-wrap" style="width: 80px; height: 80px;">
                 {%- if item.image -%}
-                  <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" class="cart-item-img">
+                  <img
+                    src="{{ item.image | image_url: width: 160 }}"
+                    alt="{{ item.title | escape }}"
+                    class="cart-item-img"
+                    loading="lazy"
+                    width="80"
+                    height="80"
+                  >
                 {%- else -%}
                   <div class="cart-item-placeholder">{% render 'icon-bottle', size: 24 %}</div>
                 {%- endif -%}

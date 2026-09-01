@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_banner": {
@@ -40,13 +49,15 @@
       ],
       "settings": {
         "eyebrow": "Hair Darkening Shampoo",
-        "headline": "Gray Coverage<br/>in <em>15 Minutes.</em><br/>Naturally.",
-        "subline": "Ammonia-free formula enriched with Argan Oil, Biotin & Keratin. Shampoo in, gray out — without compromising hair health.",
+        "headline": "Gray Coverage<br>in <em>15 Minutes.</em><br>Naturally.",
+        "subline": "Ammonia-free formula enriched with Argan Oil, Biotin & Keratin. Shampoo in, gray out,  without compromising hair health.",
         "btn_1_text": "Shop 250ml Bottle",
-        "btn_1_link": "/products/maykey-hair-darkening-shampoo-250ml",
+        "btn_1_link": "shopify://products/maykey-hair-darkening-shampoo-250ml",
         "btn_2_text": "Try Sachet Pack",
-        "btn_2_link": "/products/maykey-hair-darkening-shampoo-30ml",
-        "timer_text": "Works in just <strong>15 minutes</strong> — from application to rinse",
+        "btn_2_link": "shopify://products/maykey-hair-darkening-shampoo-30ml",
+        "timer_text": "Works in just <strong>15 minutes</strong>, from application to rinse",
+        "bottle_image": "shopify://shop_images/MHC_250_DB-nobg.png",
+        "sachet_image": "shopify://shop_images/MHC30BK-nobg.png",
         "float_1_text": "Cash on Delivery",
         "float_2_text": "0% Ammonia"
       }
@@ -114,12 +125,13 @@
             "badge_text": "",
             "title": "30ml Sachet Pack",
             "subhead": "Travel & Quick Touch-ups · Single-Use",
-            "feat_1": "Perfect for travel & on-the-go",
-            "feat_2": "Try before committing to full bottle",
+            "image": "shopify://shop_images/MHC30BK-nobg.png",
+            "feat_1": "Perfect for travel &amp; on-the-go",
+            "feat_2": "You can try before committing to full bottle",
             "feat_3": "Single-use convenience",
             "feat_4": "Same premium botanical formula",
             "btn_text": "Shop Sachet Pack",
-            "btn_link": "/products/maykey-hair-darkening-shampoo-30ml"
+            "btn_link": "shopify://products/maykey-hair-darkening-shampoo-30ml"
           }
         },
         "card_bottle": {
@@ -129,12 +141,13 @@
             "badge_text": "★ Best Value",
             "title": "250ml Pump Bottle",
             "subhead": "Multi-Application Value · For Men & Women",
-            "feat_1": "<strong>8+ applications</strong> per bottle",
+            "image": "shopify://shop_images/MHC_250_DB-nobg.png",
+            "feat_1": "<strong>10+ applications</strong> per bottle",
             "feat_2": "Premium pump dispenser — no mess",
             "feat_3": "3 shades: Natural Black, Dark Brown, Light Brown",
-            "feat_4": "Suitable for Men & Women",
+            "feat_4": "Suitable for Men &amp; Women",
             "btn_text": "Shop 250ml Bottle",
-            "btn_link": "/products/maykey-hair-darkening-shampoo-250ml"
+            "btn_link": "shopify://products/maykey-hair-darkening-shampoo-250ml"
           }
         }
       },
@@ -144,7 +157,7 @@
       ],
       "settings": {
         "eyebrow": "Two Formats. One Solution.",
-        "headline": "Find the <em>Right Format</em><br/>for Your Routine",
+        "headline": "Find the <em>Right Format</em><br>for Your Routine",
         "subline": "Whether you're traveling or coloring weekly — we have the perfect size."
       }
     },
@@ -198,7 +211,7 @@
       ],
       "settings": {
         "eyebrow": "Choose Your Shade",
-        "headline": "Your Color,<br/><em>Your Identity</em>",
+        "headline": "Your Color,<br><em>Your Identity</em>",
         "subline": "All shades are ammonia-free and deliver rich, lasting coverage in just 15 minutes."
       }
     },
@@ -254,7 +267,7 @@
       ],
       "settings": {
         "eyebrow": "The Formulation",
-        "headline": "Science-Backed.<br/><em>Botanically Enriched.</em>",
+        "headline": "Science-Backed.<br><em>Botanically Enriched.</em>",
         "subline": "Every bottle carries a carefully curated blend of active ingredients that color and care simultaneously."
       }
     },
@@ -296,7 +309,7 @@
       ],
       "settings": {
         "eyebrow": "How To Use",
-        "headline": "As Simple As<br/><em>Shampooing.</em>",
+        "headline": "As Simple As<br><em>Shampooing.</em>",
         "subline": "Three steps to rich, lasting color — no salon visit, no developer, no mess."
       }
     },
@@ -348,7 +361,7 @@
       ],
       "settings": {
         "eyebrow": "Got Questions?",
-        "headline": "Frequently Asked<br/><em>Questions</em>"
+        "headline": "Frequently Asked<br><em>Questions</em>"
       }
     }
   },
